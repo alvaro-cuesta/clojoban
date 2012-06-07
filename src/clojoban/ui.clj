@@ -4,25 +4,46 @@
   (:import [java.awt Color image.BufferedImage]
            [javax.imageio ImageIO]))
 
-(defn- draw-hud [canvas-width canvas-height]
-  )
+;;; CONSTANTS
+(def tile-size
+  16)
 
-(defn- draw-game [width height]
+(def tile-map
+  {; Map
+    \# (tiles "wall.png")
+	  (char 32) (tiles "floor.png")
+	  
+	  ; Entities
+	  \U (tiles "player-up.png")
+	  \D (tiles "player-down.png")
+	  \L (tiles "player-left.png")
+	  \R (tiles "player-right.png")
+	  \x (tiles "box.png")
+	  \@ (tiles "goal.png")})
+
+;;; PRIVATES
+(defn- gen-canvas [map entities]
+  (let [width (* tile-size (count map))
+        height (* tile-size (count [map 0]))
+        bi (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)
+        g (.createGraphics bi)]
+    (do
+      (.setColor g (Color/BLACK))
+      (.fillRect g 0 0 width height)
+      (for [y (count map)
+            x (count (map y))
+            :let [y-img (* tile-size y)
+                  x-img (* tile-size x)]]
+        (do
+          (.drawImage (tile-map (get-in map y x)) x-img y-img nil)
+          (.drawImage (tile-map (get-in entities y x)) x-img y-img nil)))
+      {:width width :heigh height :image bi})))
+    
+(defn- gen-hud-image [num steps canvas]
   )
+    
 
 ;;; PUBLICS
-
 (defn generate-image [{num :num, steps :steps, map :map, entities :entities}]
   (fn [ostream]
-		(let [width 400
-		      height 300
-		      bi (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)
-		      g (.createGraphics bi)]
-		  (do
-		    (.setColor g (Color/RED))
-		    (.fillRect g 0 0 width height)
-		    (.setColor g (Color/BLACK))
-		    (.drawString g
-		      (str "LEVEL: " num " - STEPS: " steps)
-		      0 10)
-		    (ImageIO/write bi "png" ostream)))))
+		(ImageIO/write ((gen-canvas map entities) :image) "png" ostream)))

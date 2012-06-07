@@ -14,7 +14,9 @@
 
 ;;; PUBLICS
 
-(def tiles (ref {}))
+(def tiles
+  #^{:doc "Map of tiles, indexed by filename."}
+  (ref {}))
 
 (defn add-tiles
   [dir]

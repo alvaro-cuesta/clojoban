@@ -1,11 +1,21 @@
 (ns clojoban.levels
   "Level management.")
 
-(defn- instance-map [level]
-  )
+(defn- instance-map [{data :data}]
+  (for [y data]
+    (for [x (seq y)]
+      (condp = x
+        \# \#
+        (char 32)))))
 
-(defn- instance-entities [level]
-  )
+(defn- instance-entities [{data :data}]
+  (for [y data]
+    (for [x (seq y)]
+      (condp = x
+        \P \D
+        \x \x
+        \@ \@
+        (char 32)))))
 
 (defn- load-level [levels file]
   (let [num (Integer. (.getName file))
@@ -14,8 +24,8 @@
     (conj levels
           {num
            {:name (level :name)
-            :map (instance-map data)
-            :entities (instance-entities data)}})))
+            :map (instance-map level)
+            :entities (instance-entities level)}})))
 
 (defn- load-levels [levels dir]
   (dosync
@@ -24,7 +34,9 @@
 
 ;;; PUBLICS
 
-(def levels (ref {}))
+(def levels
+  #^{:doc "Map of levels, indexed by filename (should be an integer.)"}
+  (ref {}))
 
 (defn add-levels
   "Given a dir, loads levels into clojoban.levels/levels"

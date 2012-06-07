@@ -25,6 +25,7 @@
    :entities (level :entities)}))
 
 (def game-controller
+  #^{:doc "Map of 'actions' to functions for the game."}
   {"up" action-up
    "down" action-down
    "left" action-left
