@@ -19,24 +19,24 @@
 	  \L (tiles "player-left.png")
 	  \R (tiles "player-right.png")
 	  \x (tiles "box.png")
-	  \@ (tiles "goal.png")})
+	  \@ (tiles "goal.png")
+    \- (tiles "empty.png")})
 
 ;;; PRIVATES
 (defn- gen-canvas [map entities]
-  (let [width (* tile-size (count map))
-        height (* tile-size (count [map 0]))
+  (let [width (* tile-size (count (first map)))
+        height (* tile-size (count map))
         bi (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)
         g (.createGraphics bi)]
     (do
-      (.setColor g (Color/BLACK))
-      (.fillRect g 0 0 width height)
-      (for [y (count map)
-            x (count (map y))
-            :let [y-img (* tile-size y)
-                  x-img (* tile-size x)]]
-        (do
-          (.drawImage (tile-map (get-in map y x)) x-img y-img nil)
-          (.drawImage (tile-map (get-in entities y x)) x-img y-img nil)))
+      (doseq [y (range (count map))
+              x (range (count (first map)))
+              :let [x-img (* tile-size x)
+                    y-img (* tile-size y)]]
+          (do
+            (println (get-in map [y x]))
+            (.drawImage g (tile-map (get-in map [y x])) x-img y-img nil)
+            (.drawImage g (tile-map (get-in entities [y x])) x-img y-img nil)))
       {:width width :heigh height :image bi})))
     
 (defn- gen-hud-image [num steps canvas]

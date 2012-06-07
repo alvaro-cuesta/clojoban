@@ -3,8 +3,9 @@
   (:use [clojure.java.io :only [file]])
   (:import [javax.imageio ImageIO]))
 
-(defn- load-image [path]
-  (ImageIO/read (file path)))
+(defn- load-image [tiles file]
+  (conj tiles
+        {(.getName file) (ImageIO/read file)}))
 
 (defn- load-tiles
   [tiles dir]

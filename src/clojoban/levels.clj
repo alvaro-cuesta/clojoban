@@ -2,20 +2,24 @@
   "Level management.")
 
 (defn- instance-map [{data :data}]
-  (for [y data]
-    (for [x (seq y)]
-      (condp = x
-        \# \#
-        (char 32)))))
+  (vec
+    (for [y data]
+      (vec
+        (for [x (seq y)]
+          (condp = x
+            \# \#
+            (char 32)))))))
 
 (defn- instance-entities [{data :data}]
-  (for [y data]
-    (for [x (seq y)]
-      (condp = x
-        \P \D
-        \x \x
-        \@ \@
-        (char 32)))))
+  (vec
+    (for [y data]
+      (vec
+        (for [x (seq y)]
+          (condp = x
+            \P \D
+            \x \x
+            \@ \@
+            \-))))))
 
 (defn- load-level [levels file]
   (let [num (Integer. (.getName file))
