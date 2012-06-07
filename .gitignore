@@ -1,0 +1,15 @@
+/pom.xml
+*jar
+/lib
+/classes
+/native
+/checkouts
+
+# Leiningen
+/.lein-failures
+/.lein-deps-sum
+/.lein-plugins
+
+# Eclipse
+/.project
+/.classpath
