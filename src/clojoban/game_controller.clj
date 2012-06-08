@@ -15,14 +15,15 @@
   )
 
 (defn- action-restart [session]
-  )
+  (assoc session
+         {:entities (session :entities)}))
 
-(defn- action-new [session]
+(defn- action-new [_]
   (let [level (levels 0)]
-  {:num 0
-   :steps 0
-   :map (level :map)
-   :entities (level :entities)}))
+    {:num 0
+     :steps 0
+     :map (level :map)
+     :entities (level :entities)}))
 
 (def game-controller
   #^{:doc "Map of 'actions' to functions for the game."}

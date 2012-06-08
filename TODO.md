@@ -3,9 +3,10 @@
 ## Essential
 
  - The game
-  - Actions: up, down, left, right, restart level, new game
+  - Actions: up, down, left, right
   - Ice floors
  - Endgame screen (remember players to wait for more levels!)
+ - Print error if no referer
  - Patch for Heroku compliance
  - Upload to Heroku, CodeGolf and Mediavida
 
@@ -13,8 +14,9 @@
 
  - Better lein-ring support
  - Use transients instead of refs
- - Make debug work somehow
  - Finish the README file
+ - Favicon
+ - New tiles
  
 ## Needed?
 
@@ -28,8 +30,7 @@
  - Alternate (optional) IP session mechanism (avoiding non-cross-site cookies)
   - Fall-back mechanism?
   - Do not print anything until session is up? Then, two images (one blank.)
- - Print error if no referer
- - Favicon
  - Hiscore list
  - Better query args parsing (for extensibility)
  - Bindings for Graphics and such?
+ - Several tiles picked randomly

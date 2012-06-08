@@ -1,6 +1,6 @@
 (ns clojoban.ui
   "Game UI generation."
-  (:use [clojoban.tiles])
+  (:use [clojoban.images :only [images]])
   (:import [java.awt Color image.BufferedImage]
            [javax.imageio ImageIO]))
 
@@ -10,17 +10,16 @@
 
 (def tile-map
   {; Map
-    \# (tiles "wall.png")
-	  (char 32) (tiles "floor.png")
-	  
-	  ; Entities
-	  \U (tiles "player-up.png")
-	  \D (tiles "player-down.png")
-	  \L (tiles "player-left.png")
-	  \R (tiles "player-right.png")
-	  \x (tiles "box.png")
-	  \@ (tiles "goal.png")
-    \- (tiles "empty.png")})
+   :wall (images "wall.png")
+   :floor (images "floor.png")
+   ; Entities
+	 :player-up (images "player-up.png")
+	 :player-down (images "player-down.png")
+   :player-left (images "player-left.png")
+   :player-right (images "player-right.png")
+	 :box (images "box.png")
+	 :goal (images "goal.png")
+   :empty (images "empty.png")})
 
 ;;; PRIVATES
 (defn- gen-canvas [map entities]
