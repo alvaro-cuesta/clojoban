@@ -1,7 +1,8 @@
 (ns clojoban.levels
-  "Level management.")
+  "Level management."
+  (:use [clojoban.utils :only [load-dir]]))
 
-(defn- parse-level [fn level]
+(defn- parse-level [fn data]
   (vec (for [line data]
          (vec (for [element (seq line)]
                 (fn element))))))
@@ -10,7 +11,8 @@
   (parse-level
     #(condp = %
        \# :wall
-       :floor)))
+       :floor)
+    data))
 
 (defn- instance-entities [{data :data}]
   (parse-level
@@ -18,9 +20,10 @@
        \P :player-down
        \x :box
        \@ :goal
-       :empty)))
+       :empty)
+    data))
 
-(defn- load-level [file levels]
+(defn- load-level [levels file]
   (let [num (Integer. (.getName file))
         level (read-string (slurp (.getAbsolutePath file)))
         data (level :data)]
@@ -40,4 +43,4 @@
   "Given a dir, add levels into clojoban.levels/levels."
   [dir]
   (dosync
-    (alter levels clojoban.utils/load-dir dir load-level levels)))
+    (alter levels load-dir dir load-level)))

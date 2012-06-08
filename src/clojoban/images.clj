@@ -1,9 +1,9 @@
 (ns clojoban.images
   "Image management."
-  (:use [clojure.java.io :only [file]])
+  (:use [clojoban.utils :only [load-dir]] )
   (:import [javax.imageio ImageIO]))
 
-(defn- load-image [file images]
+(defn- load-image [images file]
   (conj images
         {(.getName file) (ImageIO/read file)}))
 
@@ -17,4 +17,4 @@
   "Given a dir, add images into clojoban.images/images."
   [dir]
   (dosync
-    (alter images clojoban.utils/load-dir dir load-image images)))
+    (alter images load-dir dir load-image)))
