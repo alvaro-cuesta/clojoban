@@ -8,7 +8,7 @@
 (def tile-size
   16)
 
-(def tile-map
+(def tiles
   {; Map
    :wall (images "wall.png")
    :floor (images "floor.png")
@@ -34,8 +34,8 @@
                     y-img (* tile-size y)]]
           (do
             (println (get-in map [y x]))
-            (.drawImage g (tile-map (get-in map [y x])) x-img y-img nil)
-            (.drawImage g (tile-map (get-in entities [y x])) x-img y-img nil)))
+            (.drawImage g (tiles (get-in map [y x])) x-img y-img nil)
+            (.drawImage g (tiles (get-in entities [y x])) x-img y-img nil)))
       {:width width :heigh height :image bi})))
     
 (defn- gen-hud-image [num steps canvas]

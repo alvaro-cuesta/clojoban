@@ -1,25 +1,24 @@
 (ns clojoban.levels
   "Level management.")
 
+(defn- parse-level [fn level]
+  (vec (for [line data]
+         (vec (for [element (seq line)]
+                (fn element))))))
+
 (defn- instance-map [{data :data}]
-  (vec
-    (for [y data]
-      (vec
-        (for [x (seq y)]
-          (condp = x
-            \# \#
-            (char 32)))))))
+  (parse-level
+    #(condp = %
+       \# :wall
+       :floor)))
 
 (defn- instance-entities [{data :data}]
-  (vec
-    (for [y data]
-      (vec
-        (for [x (seq y)]
-          (condp = x
-            \P \D
-            \x \x
-            \@ \@
-            \-))))))
+  (parse-level
+    #(condp = %
+       \P :player-down
+       \x :box
+       \@ :goal
+       :empty)))
 
 (defn- load-level [file levels]
   (let [num (Integer. (.getName file))
