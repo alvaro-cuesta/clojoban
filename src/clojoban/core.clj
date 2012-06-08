@@ -1,7 +1,7 @@
 (ns clojoban.core
   "A little Sokoban clone for \"Create a User-Profile Mini-Game\" @ http://codegolf.stackexchange.com"
   (:use [clojoban.levels :only [add-levels]]
-        [clojoban.tiles :only [add-tiles]]
+        [clojoban.images :only [add-images]]
         [clojoban game-controller ui]
         [ring.adapter.jetty :only [run-jetty]]
         [ring.middleware session stacktrace]
@@ -12,8 +12,8 @@
   (if referer
     (let [splitted-ref (clojure.string/split referer #"\?")
           action (if (empty? session) "new"
-                     (when (= 2 (count splitted-ref))
-                       (splitted-ref 1)))]
+                   (when (= 2 (count splitted-ref))
+                     (splitted-ref 1)))]
       ((game-controller action identity) session))))
 
 (def index-html
@@ -46,16 +46,16 @@
 
 (defn boot
   "Bootstraps the needed data to start the server."
-  ([dir]
-    (add-levels dir)
-    (add-tiles "resources/images"))
-  ([] (boot "resources/levels")))
+  ([level-dir theme-dir]
+    (add-levels level-dir)
+    (add-images theme-dir))
+  ([] (boot "resources/levels" "resources/images")))
 
 (defn -main
   "Launches the server at port, loading the levels from dir."
-  ([port dir]
-     (boot dir)
-     (println "Launching game server on port" (Integer. port))
-     (run-jetty app {:port (Integer. port)}))
-  ([port] (-main port "resources/levels"))
+  ([port level-dir theme-dir]
+    (boot level-dir theme-dir)
+    (println "Launching game server on port" (Integer. port))
+    (run-jetty app {:port (Integer. port)}))
+  ([port] (-main port "resources/levels" "resources/images"))
   ([] (-main 1337)))

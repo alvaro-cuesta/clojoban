@@ -13,12 +13,12 @@
    :wall (images "wall.png")
    :floor (images "floor.png")
    ; Entities
-	 :player-up (images "player-up.png")
-	 :player-down (images "player-down.png")
+   :player-up (images "player-up.png")
+   :player-down (images "player-down.png")
    :player-left (images "player-left.png")
    :player-right (images "player-right.png")
-	 :box (images "box.png")
-	 :goal (images "goal.png")
+   :box (images "box.png")
+   :goal (images "goal.png")
    :empty (images "empty.png")})
 
 ;;; PRIVATES
@@ -32,17 +32,15 @@
               x (range (count (first map)))
               :let [x-img (* tile-size x)
                     y-img (* tile-size y)]]
-          (do
-            (println (get-in map [y x]))
-            (.drawImage g (tiles (get-in map [y x])) x-img y-img nil)
-            (.drawImage g (tiles (get-in entities [y x])) x-img y-img nil)))
+        (do
+          (.drawImage g (tiles (get-in map [y x])) x-img y-img nil)
+          (.drawImage g (tiles (get-in entities [y x])) x-img y-img nil)))
       {:width width :heigh height :image bi})))
-    
+
 (defn- gen-hud-image [num steps canvas]
   )
-    
 
 ;;; PUBLICS
 (defn generate-image [{num :num, steps :steps, map :map, entities :entities}]
   (fn [ostream]
-		(ImageIO/write ((gen-canvas map entities) :image) "png" ostream)))
+    (ImageIO/write ((gen-canvas map entities) :image) "png" ostream)))
