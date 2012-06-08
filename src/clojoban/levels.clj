@@ -1,37 +1,23 @@
 (ns clojoban.levels
   "Level management."
-  (:use [clojoban.utils :only [load-dir]]))
+  (:use [clojoban.utils :only [load-dir map2d]]))
 
-(defn- parse-level [fn data]
-  (vec (for [line data]
-         (vec (for [element (seq line)]
-                (fn element))))))
-
-(defn- instance-map [{data :data}]
-  (parse-level
+(defn- parse-layout [layout]
+  (map2d
     #(condp = %
        \# :wall
-       :floor)
-    data))
-
-(defn- instance-entities [{data :data}]
-  (parse-level
-    #(condp = %
-       \P :player-down
-       \x :box
        \@ :goal
-       :empty)
-    data))
+       :floor)
+    layout))
 
 (defn- load-level [levels file]
   (let [num (Integer. (.getName file))
         level (read-string (slurp (.getAbsolutePath file)))
-        data (level :data)]
+        layout (level :layout)]
     (conj levels
-          {num
-           {:name (level :name)
-            :map (instance-map level)
-            :entities (instance-entities level)}})))
+          {num (into level {:layout (parse-layout layout)
+                            :width (apply max (map count layout))
+                            :height (count layout)})})))
 
 ;;; PUBLICS
 

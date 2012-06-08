@@ -25,7 +25,7 @@
   {"/" (fn [_]
          (-> (response index-html)
            (content-type "text/html; charset=utf-8")))
-   "/game" (fn [{headers :headers, session :session,}]
+   "/game" (fn [{:keys [headers session]}]
              (let [new-session (update-session session (headers "referer"))]
                (-> (response (piped-input-stream (generate-image new-session)))
                  (content-type "image/png")

@@ -5,13 +5,19 @@
  - The game
   - Actions: up, down, left, right
   - Ice floors
+ - HUD
  - Endgame screen (remember players to wait for more levels!)
- - Print error if no referer
  - Patch for Heroku compliance
  - Upload to Heroku, CodeGolf and Mediavida
 
 ## Planned
 
+ - Remove **:empty** hack
+ - External config file
+ - Cuteify front website
+ - Print error if no referer
+ - Auto-detect tilesize
+  - Maybe add a theme config file?
  - Better lein-ring support
  - Use transients instead of refs
  - Finish the README file
@@ -25,6 +31,9 @@
  
 ## Optional
 
+ - Support for random tiles
+  - Maybe I shouldn't index images by filename
+  - May move *tiles* out of clojoban.ui or index by parent directory
  - "Click new" message if no session is available instead of forcing new
  - MongoDB for long-term session storage (using memory as cache for recent sessions)
  - Alternate (optional) IP session mechanism (avoiding non-cross-site cookies)
@@ -33,4 +42,5 @@
  - Hiscore list
  - Better query args parsing (for extensibility)
  - Bindings for Graphics and such?
- - Several tiles picked randomly
+ - Document in wiki
+ - Button (maybe URL part) to switch themes

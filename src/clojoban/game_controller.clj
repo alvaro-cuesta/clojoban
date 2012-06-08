@@ -2,34 +2,23 @@
   "Game actions controller. Implements the game's logic."
   (:use [clojoban.levels :only [levels]]))
 
-(defn- action-up [session]
-  )
-
-(defn- action-down [session]
-  )
-
-(defn- action-left [session]
-  )
-
-(defn- action-right [session]
+(defn- action-move [{:keys [map entities] :as session} direction]
   )
 
 (defn- action-restart [session]
-  (assoc session
-         {:entities (session :entities)}))
+  )
 
 (defn- action-new [_]
-  (let [level (levels 0)]
-    {:num 0
-     :steps 0
-     :map (level :map)
-     :entities (level :entities)}))
+  {:num 0
+   :steps 0
+   :level (levels 0)
+   :last-direction :player-down})
 
 (def game-controller
   #^{:doc "Map of 'actions' to functions for the game."}
-  {"up" action-up
-   "down" action-down
-   "left" action-left
-   "right" action-right
+  {"up" #(action-move % [0 -1])
+   "down" #(action-move % [0 1])
+   "left" #(action-move % [-1 0])
+   "right" #(action-move % [1 0])
    "restart" action-restart
    "new" action-new})

@@ -7,3 +7,9 @@
   [coll dir fn]
   (dosync
     (reduce fn coll (.listFiles (file dir)))))
+
+(defn map2d [fn data]
+  "Like map, but for 2d data structures."
+  (vec (for [line data]
+         (vec (for [element (seq line)]
+                (fn element))))))
