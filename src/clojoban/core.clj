@@ -1,8 +1,8 @@
 (ns clojoban.core
   "A little Sokoban clone for \"Create a User-Profile Mini-Game\" @ http://codegolf.stackexchange.com"
-  (:use [clojoban.levels :only [add-levels]]
+  (:use [clojoban.game.model :only [add-levels]]
+        [clojoban.game controller view]
         [clojoban.images :only [add-images]]
-        [clojoban game-controller ui]
         [ring.adapter.jetty :only [run-jetty]]
         [ring.middleware session stacktrace]
         [ring.util response io])

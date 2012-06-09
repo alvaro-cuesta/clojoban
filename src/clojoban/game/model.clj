@@ -1,5 +1,5 @@
-(ns clojoban.levels
-  "Level management."
+(ns clojoban.game.model
+  "Level management. Generates and hold the game model."
   (:use [clojoban.utils :only [load-dir map2d]]))
 
 (defn- parse-layout [layout]

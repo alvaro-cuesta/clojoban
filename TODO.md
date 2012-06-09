@@ -3,7 +3,8 @@
 ## Essential
 
  - The game
-  - Actions: up, down, left, right
+  - Movement actions
+  - Check for level ending
   - Ice floors
  - HUD
  - Endgame screen (remember players to wait for more levels!)
@@ -12,17 +13,20 @@
 
 ## Planned
 
- - Remove **:empty** hack
  - External config file
+ - Show "goaled" goals in a different fashion
  - Cuteify front website
- - Print error if no referer
+  - Javascript for key bindings
+ - Print error if no referer header
  - Auto-detect tilesize
   - Maybe add a theme config file?
+  - Check for consistency when loading themes?
+  - Support for non-square tiles?
  - Better lein-ring support
- - Use transients instead of refs
+ - Use transients instead of refs?
  - Finish the README file
  - Favicon
- - New tiles
+ - New tiles (I should probably talk with an artist...)
  
 ## Needed?
 
@@ -34,13 +38,14 @@
  - Support for random tiles
   - Maybe I shouldn't index images by filename
   - May move *tiles* out of clojoban.ui or index by parent directory
- - "Click new" message if no session is available instead of forcing new
+ - "Click new" message if no session is available instead of forcing new session
  - MongoDB for long-term session storage (using memory as cache for recent sessions)
- - Alternate (optional) IP session mechanism (avoiding non-cross-site cookies)
+ - Alternate (optional) IP session mechanism (avoiding cross-site cookies)
   - Fall-back mechanism?
   - Do not print anything until session is up? Then, two images (one blank.)
  - Hiscore list
- - Better query args parsing (for extensibility)
+ - Better query args parsing (for framework extensibility)
  - Bindings for Graphics and such?
- - Document in wiki
+  - Maybe use Seesaw or craft my own library
+ - Document thoroughly in wiki
  - Button (maybe URL part) to switch themes

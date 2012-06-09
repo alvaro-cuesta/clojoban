@@ -1,5 +1,5 @@
-(ns clojoban.ui
-  "Game UI generation."
+(ns clojoban.game.view
+  "Game UI generation (the game view.)"
   (:use [clojoban.images :only [images]])
   (:import [java.awt Color image.BufferedImage]
            [javax.imageio ImageIO]))
