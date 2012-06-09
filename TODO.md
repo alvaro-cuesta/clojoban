@@ -49,3 +49,4 @@
   - Maybe use Seesaw or craft my own library
  - Document thoroughly in wiki
  - Button (maybe URL part) to switch themes
+ - Level editor

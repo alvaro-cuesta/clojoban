@@ -12,6 +12,7 @@
   :main clojoban.core
   :ring {:handler clojoban.core/app
          :init clojoban.core/boot
-         :port 1337}
+         :port 1337
+         :join? false}
   
   :repl-port 4001)

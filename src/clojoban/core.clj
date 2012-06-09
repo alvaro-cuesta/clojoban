@@ -56,6 +56,6 @@
   ([port level-dir theme-dir]
     (boot level-dir theme-dir)
     (println "Launching game server on port" (Integer. port))
-    (run-jetty app {:port (Integer. port)}))
+    (run-jetty app {:port (Integer. port) :join? false}))
   ([port] (-main port "resources/levels" "resources/images"))
   ([] (-main 1337)))
