@@ -6,7 +6,7 @@
 
 ;;; CONSTANTS
 (def scale
-  [4 4])
+  [2 2])
 
 (def tile-size
   16)
