@@ -1,8 +1,8 @@
 (ns clojoban.core
   "A little Sokoban clone for \"Create a User-Profile Mini-Game\" at http://codegolf.stackexchange.com"
   (:use [clojoban.game.model :only [add-levels]]
-        [clojoban.game controller view]
-        [clojoban.images :only [add-images]]
+        [clojoban.game view controller]
+        [clojoban.images :only [images add-images]]
         [ring.adapter.jetty :only [run-jetty]]
         [ring.middleware session stacktrace]
         [ring.util response io])
@@ -48,7 +48,8 @@
   "Bootstraps the needed data to start the server."
   ([level-dir theme-dir]
     (add-levels level-dir)
-    (add-images theme-dir))
+    (add-images theme-dir)
+    (add-tiles images))
   ([] (boot "resources/levels" "resources/images")))
 
 (defn -main

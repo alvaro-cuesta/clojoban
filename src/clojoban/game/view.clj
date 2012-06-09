@@ -11,17 +11,20 @@
 (def tile-size
   16)
 
-(def tiles
-  {; Map
-   :wall (images "wall.png")
-   :floor (images "floor.png")
-   ; Entities
-   :player-up (images "player-up.png")
-   :player-down (images "player-down.png")
-   :player-left (images "player-left.png")
-   :player-right (images "player-right.png")
-   :goal (images "goal.png")
-   :box (images "box.png")})
+(def tiles (ref {}))
+
+(defn add-tiles [images]
+  (dosync (ref-set tiles  
+                   {; Map
+                    :wall (images "wall.png")
+                    :floor (images "floor.png")
+                    ; Entities
+                    :player-up (images "player-up.png")
+                    :player-down (images "player-down.png")
+                    :player-left (images "player-left.png")
+                    :player-right (images "player-right.png")
+                    :goal (images "goal.png")
+                    :box (images "box.png")})))
 
 ;;; PRIVATES
 (defn- draw-game [g {:keys [width height layout player boxes goals]} last-direction]
