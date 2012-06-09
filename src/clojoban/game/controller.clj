@@ -17,7 +17,7 @@
                    (not-any? #(= moving-two-tiles %) boxes))
           (if (every? #(some (partial = %) goals)
                       (replace {moving-to moving-two-tiles} boxes))
-            (levels (inc number))
+            (assoc (levels (inc number)) :last-direction direction)
             {:player moving-to
              :boxes (replace {moving-to moving-two-tiles} boxes)}))
         {:player moving-to}))))
