@@ -10,19 +10,11 @@ This project began as a fun way to make a bigger project for [Clojure](http://ww
 
 ## Try it!
 
-Play right here in GitHub!
+Unfortunately, I can't embed *Clojoban!* in this README since GitHub caches images, so you'll have to go to my [Clojoban live example at Heroku](http://clojoban.herokuapp.com) (which, to be honest, defeats the purpose of "remote embedding".)
 
-![Clojoban!](http://clojoban.herokuapp.com/game)
+You can see a working embedded copy at [my Programming & Code Golf user profile](http://codegolf.stackexchange.com/users/4685/lvaro-cuesta).
 
-[↑](https://github.com/alvaro-cuesta/clojoban?up#try-it)
-[←](https://github.com/alvaro-cuesta/clojoban?left#try-it)o[→](https://github.com/alvaro-cuesta/clojoban?right#try-it)
- [↓](https://github.com/alvaro-cuesta/clojoban?down#try-it)
----
-[New game](https://github.com/alvaro-cuesta/clojoban?new#try-it)
-[Restart level](https://github.com/alvaro-cuesta/clojoban?restart#try-it)
-[CLICK ME if game stops updating]() (see [Limitations](https://github.com/alvaro-cuesta/clojoban#limitations).)
-
-Or go to my Clojoban live example at Heroku. (*TODO*)
+Also there's an embedded copy at [Create a User-Profile Mini-Game](http://codegolf.stackexchange.com/questions/5933/create-a-user-profile-mini-game) (although there are some known [limitations](https://github.com/alvaro-cuesta/clojoban#limitations).)
 
 ## Features
 
@@ -30,7 +22,13 @@ Or go to my Clojoban live example at Heroku. (*TODO*)
 
 ## Limitations
 
-*TODO*
+Since you can embed the game anywhere, you'll most likely be using anchors (like `#this`) to point to the game after each click.
+
+Unfortunately, when anchors are set, click on the same link twice won't work. Your browser will think you're trying to go to an anchor and, since the URL is the same (when doing
+
+To solve this, you can either add a `?noop` action link (to be pressed between repeated actions), point users to the game homepage (like [this one for Clojoban](http://clojoban.herokuapp.com)) or advice them to press `F5`.
+
+You can experience it in my [Create a User-Profile Mini-Game](http://codegolf.stackexchange.com/questions/5933/create-a-user-profile-mini-game) puzzle post
 
 ## Usage
 
