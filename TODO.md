@@ -8,7 +8,6 @@
   - Ice floors
  - HUD
  - Endgame screen (remember players to wait for more levels!)
- - Patch for Heroku compliance
  - Upload to Heroku, CodeGolf and Mediavida
 
 ## Planned
