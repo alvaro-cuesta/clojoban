@@ -1,5 +1,5 @@
 (ns clojoban.core
-  "A little Sokoban clone for \"Create a User-Profile Mini-Game\" @ http://codegolf.stackexchange.com"
+  "A little Sokoban clone for \"Create a User-Profile Mini-Game\" at http://codegolf.stackexchange.com"
   (:use [clojoban.game.model :only [add-levels]]
         [clojoban.game controller view]
         [clojoban.images :only [add-images]]
