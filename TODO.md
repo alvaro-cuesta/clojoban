@@ -3,15 +3,17 @@
 ## Essential
 
  - The game
-  - Movement actions
   - Check for level ending
   - Ice floors
+  - Other special tiles (e.g., doors, one-ways, traps...)
  - HUD
  - Endgame screen (remember players to wait for more levels!)
  - Upload to Heroku, CodeGolf and Mediavida
+ - Add salt to actions to avoid clashes (e.g. `_clojoban_new_`)
 
 ## Planned
 
+ - Compojure
  - External config file
  - Show "goaled" goals in a different fashion
  - Cuteify front website
