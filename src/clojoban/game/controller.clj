@@ -8,18 +8,19 @@
    :player-left [-1 0]
    :player-right [1 0]})
 
-(defn- move [{:keys [layout player boxes goals]} direction]
+(defn- move [{:keys [number layout player boxes goals]} direction]
   (let [moving-to (map + player direction)
         moving-two-tiles (map + moving-to direction)]
     (when (not= (get-in layout (reverse moving-to)) :wall)
-        (if (some #(= moving-to %) boxes)
-          (when (and (not= (get-in layout (reverse moving-two-tiles)) :Wall)
-                     (not-any? #(= moving-two-tiles %) boxes))
+      (if (some #(= moving-to %) boxes)
+        (when (and (not= (get-in layout (reverse moving-two-tiles)) :wall)
+                   (not-any? #(= moving-two-tiles %) boxes))
+          (if (every? #(some (partial = %) goals)
+                      (replace {moving-to moving-two-tiles} boxes))
+            (levels (inc number))
             {:player moving-to
-             :boxes (replace {moving-to moving-two-tiles} boxes)
-             :goals goals})
-          {:player moving-to
-           :boxes boxes}))))
+             :boxes (replace {moving-to moving-two-tiles} boxes)}))
+        {:player moving-to}))))
 
 (defn- action-move [{:keys [steps level] :as session} direction]
   (into session
