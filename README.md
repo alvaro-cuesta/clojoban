@@ -10,7 +10,17 @@ This project began as a fun way to make a bigger project for [Clojure](http://ww
 
 ## Try it!
 
-Play right here in GitHub! (*TODO*)
+Play right here in GitHub!
+
+![Clojoban!](http://clojoban.herokuapp.com/game)
+
+[↑](https://github.com/alvaro-cuesta/clojoban?up#try-it)
+[←](https://github.com/alvaro-cuesta/clojoban?left#try-it)o[→](https://github.com/alvaro-cuesta/clojoban?right#try-it)
+ [↓](https://github.com/alvaro-cuesta/clojoban?down#try-it)
+---
+[New game](https://github.com/alvaro-cuesta/clojoban?new#try-it)
+[Restart level](https://github.com/alvaro-cuesta/clojoban?restart#try-it)
+[CLICK ME if game stops updating]() (see [Limitations](https://github.com/alvaro-cuesta/clojoban#limitations).)
 
 Or go to my Clojoban live example at Heroku. (*TODO*)
 
@@ -68,13 +78,10 @@ If you encounter any problems, just search for any tutorials for Heroku deployme
 ```
 $ heroku logs
 2012-06-09T12:36:55+00:00 heroku[slugc]: Slug compilation finished
-2012-06-09T12:36:56+00:00 heroku[web.1]: Starting process with command `lein run
- 59888`
+2012-06-09T12:36:56+00:00 heroku[web.1]: Starting process with command `lein run 59888`
 2012-06-09T12:37:17+00:00 app[web.1]: Launching game server on port 59888
-2012-06-09T12:37:17+00:00 app[web.1]: 2012-06-09 12:37:17.636:INFO:oejs.Server:j
-etty-7.6.1.v20120215#<Server org.eclipse.jetty.server.Server@3bbbbafc>
-2012-06-09T12:37:17+00:00 app[web.1]: 2012-06-09 12:37:17.692:INFO:oejs.Abstract
-Connector:Started SelectChannelConnector@0.0.0.0:59888
+2012-06-09T12:37:17+00:00 app[web.1]: 2012-06-09 12:37:17.636:INFO:oejs.Server:jetty-7.6.1.v20120215 #<Server org.eclipse.jetty.server.Server@3bbbbafc>
+2012-06-09T12:37:17+00:00 app[web.1]: 2012-06-09 12:37:17.692:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:59888
 2012-06-09T12:37:17+00:00 app[web.1]:
 2012-06-09T12:37:18+00:00 heroku[web.1]: State changed from starting to up
 ```
