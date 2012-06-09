@@ -11,13 +11,14 @@
     layout))
 
 (defn- load-level [levels file]
-  (let [num (Integer. (.getName file))
+  (let [number (Integer. (.getName file))
         level (read-string (slurp (.getAbsolutePath file)))
         layout (level :layout)]
     (conj levels
-          {num (into level {:layout (parse-layout layout)
-                            :width (apply max (map count layout))
-                            :height (count layout)})})))
+          {number (into level {:number number
+                               :layout (parse-layout layout)
+                               :width (apply max (map count layout))
+                               :height (count layout)})})))
 
 ;;; PUBLICS
 
