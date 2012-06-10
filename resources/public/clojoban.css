@@ -1,0 +1,54 @@
+kbd {
+	white-space: nowrap;
+	color: #000;
+	background: #eee;
+	border-style: solid;
+	border-color: #ccc #aaa #888 #bbb;
+	padding: 0.1em 0.6em;
+	border: 1px solid #ccc;
+	font-size: 11px;
+	font-family: "Courier New", Courier, monospace;
+	background-color: #f7f7f7;
+	color: #333;
+	-moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;
+	-webkit-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;
+	box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	display: inline-block;
+	margin: 0 0.1em;
+	text-shadow: 0 1px 0 #fff;
+	line-height: 1.4;
+}
+
+body, ul, h1, h2, h3, p { margin: 0 0 0 0; }
+html, body, #container { height: 100%; }
+body > #container { height: auto; min-height: 100%; }
+#game, #instructions {
+	padding: 10px;
+	padding-bottom: 3em;
+}
+
+p { margin-bottom: 12px; }
+
+#footer {
+	clear: both;
+	position: relative;
+	z-index: 10;
+	height: 3em;
+	margin-top: -3em;
+	background-color: #000;
+}
+
+a, a:link, a:visited, a:active, a:hover #footer {
+	color: #fff;
+}
+
+.name {
+	color: #777;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+}

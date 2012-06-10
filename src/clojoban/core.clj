@@ -30,6 +30,7 @@
 (defroutes app
   clojoban
   (route/resources "/")
+  (route/resources "/images" {:root "images"})
   (route/not-found "<h1>Page not found (404)</h1>"))
 
 (defn- wrap-root-index [handler]

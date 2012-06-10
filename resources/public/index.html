@@ -11,21 +11,35 @@
 	<body>
 		<div id="container">
 			<div id="game">
+				<h1>Clojoban!</h1>
 				<div id="image">
 					<img src="/game" alt="Clojoban!"/>
 				</div>
 				<div id="controls">
-					<a href="/?_clojoban_up_" id="up">↑</a>
-					<a href="/?_clojoban_down_" id="down">↓</a>
-					<a href="/?_clojoban_left_" id="left">←</a>
-					<a href="/?_clojoban_right_" id="right">→</a>
-					<a href="/?_clojoban_restart_" id="restart">Restart level</a>
-					<a href="/?_clojoban_new_" id="new">New game</a>
+					<a href="/?_clojoban_up_" id="up"><kbd>↑</kbd></a><br/>
+					<a href="/?_clojoban_left_" id="left"><kbd>←</kbd></a> <a href="/?_clojoban_right_" id="right"><kbd>→</kbd></a><br/>
+					<a href="/?_clojoban_down_" id="down"><kbd>↓</kbd></a>
+				</div>
+				<div id="options">
+					<a href="/?_clojoban_restart_" id="restart"><kbd>Restart level</kbd></a>
+					<a href="/?_clojoban_new_" id="new"><kbd>New game</kbd></a>
 				</div>
 			</div>
-			<div id="footer">
-				<a href="https://github.com/alvaro-cuesta/clojoban">Clojoban @ GitHub</a>
+			<div id="instructions">
+				<h2>Instructions</h2>
+				<p>You are <span class="name">Robby</span> <img src="/images/player-down.png" alt="Robby"/>, a hard-working robot. You work at a <span class="name">FlipCo Industries</span> as a heavy load carrier.<br/>
+				You must move every <span class="name">box</span> <img src="/images/box.png" alt="Box"/> to each <span class="name">goal</span> <img src="/images/goal.png" alt="Goal"/> spending as few steps as possible.<br/>
+				<span class="name">FlipCo</span>'s facilities are DANGEROUS. There are lots of challenges and special for you to discover.<br/>
+				If you get stuck, click <kbd>Restart level</kbd> (but your step count won't be reset!)</p>
+				<h3>Keys:</h3>
+				<p>You can click on the links below the game. Alternatively, use your keyboard:<br/>
+				<kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> Move<br/>
+				<kbd>R</kbd> Restart level<br/>
+				<kbd>N</kbd> New game</p>
 			</div>
+		</div>
+		<div id="footer">
+			<a href="https://github.com/alvaro-cuesta/clojoban">Clojoban @ GitHub</a>
 		</div>
 	</body>
 </html>
