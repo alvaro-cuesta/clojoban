@@ -1,4 +1,4 @@
-(defproject clojoban "0.2.1-SNAPSHOT"
+(defproject clojoban "0.2.2-SNAPSHOT"
   :description "A little Sokoban clone for \"Create a User-Profile Mini-Game\" @ http://codegolf.stackexchange.com"
   :license {:name "Eclipse Public License - v 1.0"
             :url "http://www.eclipse.org/legal/epl-v10.html"

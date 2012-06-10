@@ -12,8 +12,6 @@ You should think of Clojoban as a framework for "remote embedabble" games, feel 
 
 ## Try it!
 
-![Clojoban!](http://clojoban.herokuapp.com/game)
-
 Unfortunately, I can't embed *Clojoban!* in this README since GitHub caches images, so you'll have to go to my [Clojoban live example at Heroku](http://clojoban.herokuapp.com) (which, to be honest, defeats the purpose of "remote embedding".)
 
 You can see a working embedded copy at [my Programming & Code Golf user profile](http://codegolf.stackexchange.com/users/4685/lvaro-cuesta). Also, there's an embedded copy at [Create a User-Profile Mini-Game](http://codegolf.stackexchange.com/questions/5933/create-a-user-profile-mini-game) (although there are some known [limitations](https://github.com/alvaro-cuesta/clojoban#limitations).)
