@@ -5,7 +5,9 @@
         [clojoban.images :only [images add-images]]
         [ring.adapter.jetty :only [run-jetty]]
         [ring.middleware session stacktrace resource file-info]
-        [ring.util response io])
+        [ring.util response io]
+        [compojure.core])
+  (:require [compojure.route :as route])
   (:gen-class))
 
 (defn- update-session [session referer]
@@ -16,30 +18,34 @@
                      (splitted-ref 1)))]
       ((game-controller action identity) session)))) ; HACK! game-controller
 
+(defroutes clojoban
+  (GET "/game" []
+       (fn [{:keys [headers session]}]
+         (let [new-session (update-session session (headers "referer"))]
+           (-> (response (piped-input-stream (generate-image new-session)))
+             (content-type "image/png")
+             (assoc :session new-session)
+             (assoc :cache-control "max-age=0, no-cache"))))))
 
-(def route
-  #^:private
-  {"/game" (fn [{:keys [headers session]}]
-                 (let [new-session (update-session session (headers "referer"))]
-                   (-> (response (piped-input-stream (generate-image new-session)))
-                     (content-type "image/png")
-                     (assoc :session new-session)
-                     (assoc :cache-control "max-age=0, no-cache"))))})
+(defroutes app
+  ;(GET "/" [] (index-page))
+  clojoban
+  (route/resources "/")
+  (route/not-found "<h1>Page not found (404)</h1>"))
 
-(defn- handler [request]
-  ((route (request :uri)
-          (fn [_] (-> (not-found "Page not found. Are you messing with me, boy?")
-                    (assoc :cache-control "max-age=86400, must-revalidate"))))
-    request))
+(defn- wrap-root-index [handler]
+  (fn [req]
+    (handler
+      (update-in req [:uri]
+                 #(if (= "/" %) "/index.html" %)))))
 
 ;;; PUBLICS
 
 (def app
   "Wrapped application handler."
-  (-> handler
+  (-> app
+    (wrap-root-index)
     (wrap-session)
-    (wrap-resource "public")
-    (wrap-file-info)
     (wrap-stacktrace)))
 
 (defn boot

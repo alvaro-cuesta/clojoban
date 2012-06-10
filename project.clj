@@ -6,7 +6,8 @@
             :comments "Same as Clojure"}
   
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [ring "1.1.0"]]
+                 [ring "1.1.0"]
+                 [compojure "1.1.0"]]
   :plugins [[lein-ring "0.7.1"]]
   
   :main clojoban.core
