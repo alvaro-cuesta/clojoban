@@ -3,16 +3,29 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Clojoban!</title>
-		<style type="text/css"></style>
+		<link rel="icon" href="favicon.ico">
+		<link rel="stylesheet" href="clojoban.css" type="text/css">
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<script type="text/javascript" src="clojoban.js"></script>
 	</head>
 	<body>
-		<img src="/game">
-		<a href="/?up">↑</a>
-		<a href="/?down">↓</a>
-		<a href="/?left">←</a>
-		<a href="/?right">→</a>
-		<a href="/?restart">Restart level</a>
-		<a href="/?new">New game</a>
-		<a href="https://github.com/alvaro-cuesta/clojoban">Clojoban @ GitHub</a>
+		<div id="container">
+			<div id="game">
+				<div id="image">
+					<img src="/game" alt="Clojoban!"/>
+				</div>
+				<div id="controls">
+					<a href="/?_clojoban_up_" id="up">↑</a>
+					<a href="/?_clojoban_down_" id="down">↓</a>
+					<a href="/?_clojoban_left_" id="left">←</a>
+					<a href="/?_clojoban_right_" id="right">→</a>
+					<a href="/?_clojoban_restart_" id="restart">Restart level</a>
+					<a href="/?_clojoban_new_" id="new">New game</a>
+				</div>
+			</div>
+			<div id="footer">
+				<a href="https://github.com/alvaro-cuesta/clojoban">Clojoban @ GitHub</a>
+			</div>
+		</div>
 	</body>
 </html>

@@ -11,20 +11,36 @@
 (defn- update-session [session referer]
   (if referer
     (let [splitted-ref (clojure.string/split referer #"\?")
-          action (if (empty? session) "new"
+          action (if (empty? session) "_clojoban_new_" ; HACK!
                    (when (= 2 (count splitted-ref))
                      (splitted-ref 1)))]
-      ((game-controller action identity) session))))
+      ((game-controller action identity) session)))) ; HACK! game-controller
 
-(def index-html
+(def cached-static
   #^:private
-  (slurp "resources/static/index.html"))
+  {:index-html (slurp "resources/static/index.html")
+   :jquery-min-js (slurp "resources/static/jquery.min.js")
+   :clojoban-js (slurp "resources/static/clojoban.js")
+   :clojoban-css (slurp "resources/static/clojoban.css")
+   :favicon-ico (slurp "resources/static/favicon.ico")})
 
 (def route
   #^:private
   {"/" (fn [_]
-         (-> (response index-html)
+         (-> (response (cached-static :index-html))
            (content-type "text/html; charset=utf-8")))
+   "/jquery.min.js" (fn [_]
+                      (-> (response (cached-static :jquery-min-js))
+                        (content-type "text/javascript")))
+   "/clojoban.js" (fn [_]
+                    (-> (response (cached-static :clojoban-js))
+                      (content-type "text/javascript")))
+   "/clojoban.css" (fn [_]
+                     (-> (response (cached-static :clojoban-css))
+                       (content-type "text/css")))
+   "/favicon.ico" (fn [_]
+                    (-> (response (cached-static :favicon-ico))
+                      (content-type "image/x-icon")))
    "/game" (fn [{:keys [headers session]}]
              (let [new-session (update-session session (headers "referer"))]
                (-> (response (piped-input-stream (generate-image new-session)))

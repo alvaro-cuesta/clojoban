@@ -6,7 +6,9 @@ A little Sokoban clone for [Create a User-Profile Mini-Game](http://codegolf.sta
 
 [![Clojoban!](http://i.imgur.com/zIuPq.png)](http://clojoban.herokuapp.com)
 
-This project began as a fun way to make a bigger project for [Clojure](http://www.clojure.org), so I'm open to criticism (and willing to learn from it!) I think I did a good job in the end. I aimed for modularity, good extensibility and tried to follow good practices as much as possible. This is more like a framework for "remote embedabble" games, feel free to create your own games from it! (see the [license](https://github.com/alvaro-cuesta/clojoban#license) below.)
+This project began as a fun way to make a bigger project for [Clojure](http://www.clojure.org), so I'm open to criticism (and willing to learn from it!) I think I did a good job in the end. I aimed for modularity, good extensibility and tried to follow good practices as much as possible.
+
+You should think of Clojoban as a framework for "remote embedabble" games, feel free to create your own games from it! (see the [license](https://github.com/alvaro-cuesta/clojoban#license) below.)
 
 ## Try it!
 

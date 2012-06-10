@@ -1,5 +1,7 @@
 # TODO list
 
+*(ordered by relevance)*
+
 ## Essential
 
  - The game
@@ -8,8 +10,8 @@
   - Other special tiles (e.g., doors, one-ways, traps...)
  - HUD
  - Endgame screen (remember players to wait for more levels!)
- - Upload to Heroku, CodeGolf and Mediavida
- - Add salt to actions to avoid clashes (e.g. `_clojoban_new_`)
+ - Upload to CodeGolf
+ - Go back to :player-down in new levels
 
 ## Planned
 
@@ -17,7 +19,6 @@
  - External config file
  - Show "goaled" goals in a different fashion
  - Cuteify front website
-  - Javascript for key bindings
  - Print error if no referer header
  - Auto-detect tilesize
   - Maybe add a theme config file?
@@ -28,6 +29,12 @@
  - Finish the README file
  - Favicon
  - New tiles (I should probably talk with an artist...)
+ - Play link (for testing levels)
+  - URL/send data
+  - Remote URL
+  - Must sandbox somehow!
+ - Remote theme?
+ - W3C validate
  
 ## Needed?
 
@@ -45,6 +52,7 @@
   - Fall-back mechanism?
   - Do not print anything until session is up? Then, two images (one blank.)
  - Hiscore list
+  - Input name in a separate page?
  - Better query args parsing (for framework extensibility)
  - Bindings for Graphics and such?
   - Maybe use Seesaw or craft my own library

@@ -14,7 +14,7 @@
 (def tiles (ref {}))
 
 (defn add-tiles [images]
-  (dosync (ref-set tiles  
+  (dosync (ref-set tiles
                    {; Map
                     :wall (images "wall.png")
                     :floor (images "floor.png")
