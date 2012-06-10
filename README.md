@@ -12,7 +12,7 @@ You should think of Clojoban as a framework for "remote embedabble" games, feel 
 
 ## Try it!
 
-[![Clojoban!](http://clojoban.herokuapp.com/game.png?not-dynamic=actually)](http://clojoban.herokuapp.com/)
+[![Clojoban](http://clojoban.herokuapp.com/game.png?not-dynamic=actually)](http://clojoban.herokuapp.com/)
 
 Unfortunately, I can't embed *Clojoban!* in this README since GitHub caches images, so you'll have to go to my [Clojoban live example at Heroku](http://clojoban.herokuapp.com) (which, to be honest, defeats the purpose of "remote embedding".)
 
