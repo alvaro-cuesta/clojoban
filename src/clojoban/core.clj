@@ -4,7 +4,7 @@
         [clojoban.game view controller]
         [clojoban.images :only [images add-images]]
         [ring.adapter.jetty :only [run-jetty]]
-        [ring.middleware session stacktrace content-type]
+        [ring.middleware session stacktrace resource file-info]
         [ring.util response io])
   (:gen-class))
 
@@ -16,31 +16,13 @@
                      (splitted-ref 1)))]
       ((game-controller action identity) session)))) ; HACK! game-controller
 
-(def cached-static
-  #^:private
-  {:index-html (slurp "resources/static/index.html")
-   :jquery-min-js (slurp "resources/static/jquery.min.js")
-   :clojoban-js (slurp "resources/static/clojoban.js")
-   :clojoban-css (slurp "resources/static/clojoban.css")
-   :favicon-ico (slurp "resources/static/favicon.ico")})
-
-(defn- serve-cached-static
-  ([resource type]
-    (fn [req] (content-type ((serve-cached-static resource) req) type)))
-  ([resource]
-    (fn [req] (-> (response (cached-static resource))
-                (assoc :cache-control "max-age=86400, must-revalidate")))))
 
 (def route
   #^:private
-  {"/" (serve-cached-static :index-html "text/html; charset=UTF-8")
-   "/jquery.min.js" (serve-cached-static :jquery-min-js)
-   "/clojoban.js" (serve-cached-static :clojoban-js)
-   "/clojoban.css" (serve-cached-static :clojoban-css)
-   "/favicon.ico" (serve-cached-static :favicon-ico)
-   "/game.png" (fn [{:keys [headers session]}]
+  {"/game" (fn [{:keys [headers session]}]
                  (let [new-session (update-session session (headers "referer"))]
                    (-> (response (piped-input-stream (generate-image new-session)))
+                     (content-type "image/png")
                      (assoc :session new-session)
                      (assoc :cache-control "max-age=0, no-cache"))))})
 
@@ -53,10 +35,11 @@
 ;;; PUBLICS
 
 (def app
-  "Application handler, wrapped around session and stacktrace middleware."
+  "Wrapped application handler."
   (-> handler
     (wrap-session)
-    (wrap-content-type)
+    (wrap-resource "public")
+    (wrap-file-info)
     (wrap-stacktrace)))
 
 (defn boot
