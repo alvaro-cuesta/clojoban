@@ -43,9 +43,9 @@
 
 (def game-controller
   #^{:doc "Map of 'actions' to functions for the game."}
-  {"up" (wrapper #(action-move % :player-up))
-   "down" (wrapper #(action-move % :player-down))
-   "left" (wrapper #(action-move % :player-left))
-   "right" (wrapper #(action-move % :player-right))
-   "restart" (wrapper action-restart)
-   "new" action-new})
+  {"_clojoban_up_" (wrapper #(action-move % :player-up))
+   "_clojoban_down_" (wrapper #(action-move % :player-down))
+   "_clojoban_left_" (wrapper #(action-move % :player-left))
+   "_clojoban_right_" (wrapper #(action-move % :player-right))
+   "_clojoban_restart_" (wrapper action-restart)
+   "_clojoban_new_" action-new})
