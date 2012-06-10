@@ -19,7 +19,7 @@
       ((game-controller action identity) session)))) ; HACK! game-controller
 
 (defroutes clojoban
-  (GET "/game.png" []
+  (GET "/game" []
        (fn [{:keys [headers session]}]
          (let [new-session (update-session session (headers "referer"))]
            (-> (response (piped-input-stream (generate-image new-session)))
