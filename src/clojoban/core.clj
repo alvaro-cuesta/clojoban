@@ -24,11 +24,10 @@
          (let [new-session (update-session session (headers "referer"))]
            (-> (response (piped-input-stream (generate-image new-session)))
              (content-type "image/png")
-             (assoc :session new-session)
-             (assoc :cache-control "max-age=0, no-cache"))))))
+             (header "Cache-Control" "max-age=0, must-revalidate")
+             (assoc :session new-session))))))
 
 (defroutes app
-  ;(GET "/" [] (index-page))
   clojoban
   (route/resources "/")
   (route/not-found "<h1>Page not found (404)</h1>"))
