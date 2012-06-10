@@ -6,7 +6,7 @@ A little Sokoban clone for [Create a User-Profile Mini-Game](http://codegolf.sta
 
 [![Clojoban!](http://i.imgur.com/zIuPq.png)](http://clojoban.herokuapp.com)
 
-This project began as a fun way to make a bigger project for [Clojure](http://www.clojure.org), so I'm open to criticism (and willing to learn from it!) I think I did a good job in the end. I aimed for modularity, good extensibility and tried to follow good practices as much as possible.
+This project began as a fun way to make a bigger project for [Clojure](http://www.clojure.org), so I'm open to criticism (and willing to learn from it!) I aimed for modularity, good extensibility and tried to follow good practices as much as possible.
 
 You should think of Clojoban as a framework for "remote embedabble" games, feel free to create your own games from it! (see the [license](https://github.com/alvaro-cuesta/clojoban#license) below.)
 
@@ -15,10 +15,6 @@ You should think of Clojoban as a framework for "remote embedabble" games, feel 
 Unfortunately, I can't embed *Clojoban!* in this README since GitHub caches images, so you'll have to go to my [Clojoban live example at Heroku](http://clojoban.herokuapp.com) (which, to be honest, defeats the purpose of "remote embedding".)
 
 You can see a working embedded copy at [my Programming & Code Golf user profile](http://codegolf.stackexchange.com/users/4685/lvaro-cuesta). Also, there's an embedded copy at [Create a User-Profile Mini-Game](http://codegolf.stackexchange.com/questions/5933/create-a-user-profile-mini-game) (although there are some known [limitations](https://github.com/alvaro-cuesta/clojoban#limitations).)
-
-## Features
-
-*TODO*
 
 ## Limitations
 
@@ -48,12 +44,7 @@ Some people disable this feature for privacy reasons, so remotely-embedded Clojo
 
 ## Usage
 
-You can run Clojoban in several ways:
-
 ```
-- Clojure:
-TODO
-
 - Leiningen:
 lein run <port> <levels-dir theme-dir>
 
