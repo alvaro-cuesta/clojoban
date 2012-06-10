@@ -25,6 +25,7 @@
            (-> (response (piped-input-stream (generate-image new-session)))
              (content-type "image/png")
              (header "Cache-Control" "max-age=0, must-revalidate")
+             (header "P3P" "CP=\"CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"")
              (assoc :session new-session))))))
 
 (defroutes app
