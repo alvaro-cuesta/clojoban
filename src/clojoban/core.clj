@@ -4,7 +4,7 @@
         [clojoban.game view controller]
         [clojoban.images :only [images add-images]]
         [ring.adapter.jetty :only [run-jetty]]
-        [ring.middleware session stacktrace]
+        [ring.middleware session stacktrace content-type]
         [ring.util response io])
   (:gen-class))
 
@@ -24,32 +24,30 @@
    :clojoban-css (slurp "resources/static/clojoban.css")
    :favicon-ico (slurp "resources/static/favicon.ico")})
 
+(defn- serve-cached-static
+  ([resource type]
+    (fn [req] (content-type ((serve-cached-static resource) req) type)))
+  ([resource]
+    (fn [req] (-> (response (cached-static resource))
+                (assoc :cache-control "max-age=86400, must-revalidate")))))
+
 (def route
   #^:private
-  {"/" (fn [_]
-         (-> (response (cached-static :index-html))
-           (content-type "text/html; charset=utf-8")))
-   "/jquery.min.js" (fn [_]
-                      (-> (response (cached-static :jquery-min-js))
-                        (content-type "text/javascript")))
-   "/clojoban.js" (fn [_]
-                    (-> (response (cached-static :clojoban-js))
-                      (content-type "text/javascript")))
-   "/clojoban.css" (fn [_]
-                     (-> (response (cached-static :clojoban-css))
-                       (content-type "text/css")))
-   "/favicon.ico" (fn [_]
-                    (-> (response (cached-static :favicon-ico))
-                      (content-type "image/x-icon")))
-   "/game" (fn [{:keys [headers session]}]
-             (let [new-session (update-session session (headers "referer"))]
-               (-> (response (piped-input-stream (generate-image new-session)))
-                 (content-type "image/png")
-                 (assoc :session new-session))))})
+  {"/" (serve-cached-static :index-html "text/html; charset=UTF-8")
+   "/jquery.min.js" (serve-cached-static :jquery-min-js)
+   "/clojoban.js" (serve-cached-static :clojoban-js)
+   "/clojoban.css" (serve-cached-static :clojoban-css)
+   "/favicon.ico" (serve-cached-static :favicon-ico)
+   "/game.png" (fn [{:keys [headers session]}]
+                 (let [new-session (update-session session (headers "referer"))]
+                   (-> (response (piped-input-stream (generate-image new-session)))
+                     (assoc :session new-session)
+                     (assoc :cache-control "max-age=0, no-cache"))))})
 
 (defn- handler [request]
   ((route (request :uri)
-          (fn [_] (-> (not-found "Page not found. Are you messing with me, boy?"))))
+          (fn [_] (-> (not-found "Page not found. Are you messing with me, boy?")
+                    (assoc :cache-control "max-age=86400, must-revalidate"))))
     request))
 
 ;;; PUBLICS
@@ -58,6 +56,7 @@
   "Application handler, wrapped around session and stacktrace middleware."
   (-> handler
     (wrap-session)
+    (wrap-content-type)
     (wrap-stacktrace)))
 
 (defn boot
