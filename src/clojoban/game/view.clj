@@ -11,7 +11,7 @@
 (def tile-size
   16)
 
-(def tiles (ref {}))
+(defonce tiles (ref {}))
 
 (defn add-tiles [images]
   (dosync (ref-set tiles
@@ -62,23 +62,26 @@
         dummy-graphics (.createGraphics (BufferedImage. 1 1 BufferedImage/TYPE_INT_ARGB))
         dummy-font (.getFont dummy-graphics)
         font-metrics (.getFontMetrics dummy-graphics dummy-font)
-        bar-text (if author 
+        font-height (+ 3 (.getHeight font-metrics))
+        top-text (if author 
                    (format "%03d: %s (by %s)" number name author)
                    (format "%03d: %s" number name))
-        bar-width (.stringWidth font-metrics bar-text)
-        bar-height (+ 3 (.getHeight font-metrics))
+        top-width (.stringWidth font-metrics top-text)
+        bottom-text (format "Steps: %d" steps)
+        bottom-width (.stringWidth font-metrics bottom-text)
         game-width (* tile-size width scale-x)
         game-height (* tile-size height scale-y)
-        img-width (max game-width bar-width)
-        img-height (+ game-height bar-height)
+        img-width (max game-width top-width bottom-width)
+        img-height (+ game-height (* 2 font-height))
         image (BufferedImage. img-width img-height BufferedImage/TYPE_INT_ARGB)
         g (.createGraphics image)
         font (.getFont g)]
     (do
       (.setColor g (Color/BLACK))
       (.setFont g font)
-      (.drawString g bar-text 0 bar-height)
-      (.translate g 0 (+ 3 bar-height))
+      (.drawString g top-text 0 font-height)
+      (.drawString g bottom-text 0 (+ (* 2 font-height) game-height -3))
+      (.translate g 0 (+ 3 font-height))
       (.scale g scale-x scale-y)
       (draw-game g level last-direction)
       image)))

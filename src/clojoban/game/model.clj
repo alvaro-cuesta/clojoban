@@ -23,7 +23,7 @@
 
 ;;; PUBLICS
 
-(def levels
+(defonce levels
   #^{:doc "Map of levels, indexed by filename (should be an integer.)"}
   (ref {}))
 
