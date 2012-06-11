@@ -32,6 +32,7 @@
   clojoban
   (route/resources "/")
   (route/resources "/images" {:root "images"})
+  (route/resources "/levels" {:root "levels"})
   (route/not-found "<h1>Page not found (404)</h1>"))
 
 (defn- wrap-root-index [handler]
