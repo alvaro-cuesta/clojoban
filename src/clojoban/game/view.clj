@@ -1,7 +1,7 @@
 (ns clojoban.game.view
   "Game UI generation (the game view.)"
   (:use [clojoban.images :only [images]])
-  (:import [java.awt Color image.BufferedImage]
+  (:import [java.awt Color Font FontMetrics image.BufferedImage]
            [javax.imageio ImageIO]))
 
 ;;; CONSTANTS
@@ -57,15 +57,28 @@
         (* tile-size player-y)
         nil))))
 
-(defn- draw-ui [steps {:keys [width height] :as level} last-direction]
+(defn- draw-ui [steps {:keys [number name author width height] :as level} last-direction]
   (let [[scale-x scale-y] scale
+        dummy-graphics (.createGraphics (BufferedImage. 1 1 BufferedImage/TYPE_INT_ARGB))
+        dummy-font (.getFont dummy-graphics)
+        font-metrics (.getFontMetrics dummy-graphics dummy-font)
+        bar-text (if author 
+                   (format "%03d: %s (by %s)" number name author)
+                   (format "%03d: %s" number name))
+        bar-width (.stringWidth font-metrics bar-text)
+        bar-height (+ 3 (.getHeight font-metrics))
         game-width (* tile-size width scale-x)
         game-height (* tile-size height scale-y)
-        img-width game-width
-        img-height game-height
+        img-width (max game-width bar-width)
+        img-height (+ game-height bar-height)
         image (BufferedImage. img-width img-height BufferedImage/TYPE_INT_ARGB)
-        g (.createGraphics image)]
+        g (.createGraphics image)
+        font (.getFont g)]
     (do
+      (.setColor g (Color/BLACK))
+      (.setFont g font)
+      (.drawString g bar-text 0 bar-height)
+      (.translate g 0 (+ 3 bar-height))
       (.scale g scale-x scale-y)
       (draw-game g level last-direction)
       image)))

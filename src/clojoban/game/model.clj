@@ -6,6 +6,7 @@
   (map2d
     #(condp = %
        \# :wall
+       
        \@ :goal
        :floor)
     layout))
