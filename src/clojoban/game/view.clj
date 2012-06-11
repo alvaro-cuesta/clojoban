@@ -72,7 +72,7 @@
         game-width (* tile-size width scale-x)
         game-height (* tile-size height scale-y)
         img-width (max game-width top-width bottom-width)
-        img-height (+ game-height (* 2 font-height))
+        img-height (+ game-height (* 2 font-height) 3)
         image (BufferedImage. img-width img-height BufferedImage/TYPE_INT_ARGB)
         g (.createGraphics image)
         font (.getFont g)]
