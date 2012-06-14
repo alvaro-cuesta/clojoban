@@ -68,7 +68,7 @@
                    (format "%03d: %s (by %s)" number name author)
                    (format "%03d: %s" number name))
         top-width (.stringWidth font-metrics top-text)
-        bottom-text (format "Steps: %d - Total: %d" steps steps)
+        bottom-text (format "Steps: %d - Total: %d" steps total-steps)
         bottom-width (.stringWidth font-metrics bottom-text)
         game-width (* tile-size width scale-x)
         game-height (* tile-size height scale-y)

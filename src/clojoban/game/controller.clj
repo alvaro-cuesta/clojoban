@@ -39,19 +39,31 @@
                   {:player to})))
         level)))
 
-(defn- action-move [{:keys [steps level] :as session} direction]
-  (into session
+(defn- action-move [{:keys [steps total-steps level] :as session} direction]
+  (let [new-level (move-player level (directions direction))]
+    (cond
+      (= level new-level)
+        session
+      (= (level num) (new-level num))
         {:steps (inc steps)
-         :level (move-player level (directions direction))
-         :last-direction direction}))
+         :total-steps (inc total-steps)
+         :level new-level
+         :last-direction direction}
+      :else
+        {:steps 0
+         :total-steps (inc total-steps)
+         :level new-level
+         :last-direction direction})))
 
-(defn- action-restart [{:keys [level] :as session}]
-  (into session
-        {:level (levels (level :number))
-         :last-direction :player-down}))
+(defn- action-restart [{:keys [total-steps level] :as session}]
+  {:steps 0
+   :total-steps total-steps
+   :level (levels (level :number))
+   :last-direction :player-down})
 
 (defn- action-new [_]
   {:steps 0
+   :total-steps 0
    :level (levels 0)
    :last-direction :player-down})
 
