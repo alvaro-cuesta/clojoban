@@ -8,24 +8,41 @@
    :player-left [-1 0]
    :player-right [1 0]})
 
-(defn- move [{:keys [number layout player boxes goals]} direction]
-  (let [moving-to (map + player direction)
-        moving-two-tiles (map + moving-to direction)]
-    (when (not= (get-in layout (reverse moving-to)) :wall)
-      (if (some #(= moving-to %) boxes)
-        (when (and (not= (get-in layout (reverse moving-two-tiles)) :wall)
-                   (not-any? #(= moving-two-tiles %) boxes))
-          (if (every? #(some (partial = %) goals)
-                      (replace {moving-to moving-two-tiles} boxes))
-            (assoc (levels (inc number)) :last-direction direction)
-            {:player moving-to
-             :boxes (replace {moving-to moving-two-tiles} boxes)}))
-        {:player moving-to}))))
+(defn- push-box [from {:keys [number layout boxes goals] :as level} direction]
+  (let [to (map + from direction)
+        to-tile (get-in layout (reverse to))
+        pushed (assoc level :boxes (replace {from to} boxes))]
+    (if (and (not= to-tile :wall)
+             (not-any? #(= to %) boxes))
+      (if (every? #(some (partial = %) goals)
+                  (replace {from to} boxes))
+        (levels (inc number))
+        (if (= to-tile :ice)
+          (push-box to pushed direction)
+          pushed))
+      level)))
+
+(defn- move-player [{:keys [number layout player boxes] :as level} direction]
+    (let [to (map + player direction)
+          to-tile (get-in layout (reverse to))]
+      (if (not= to-tile :wall)
+        (if (some #(= to %) boxes)
+          (let [pushed-level (push-box to level direction)]
+            (if (and
+                  (not= level pushed-level)
+                  (= number (pushed-level :number)))
+              (move-player pushed-level direction)
+              pushed-level))
+          (into level
+                (if (= to-tile :ice)
+                  (move-player (assoc level :player to) direction)
+                  {:player to})))
+        level)))
 
 (defn- action-move [{:keys [steps level] :as session} direction]
   (into session
         {:steps (inc steps)
-         :level (into level (move level (directions direction)))
+         :level (move-player level (directions direction))
          :last-direction direction}))
 
 (defn- action-restart [{:keys [level] :as session}]

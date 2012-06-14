@@ -17,6 +17,7 @@
   (dosync (ref-set tiles
                    {; Map
                     :wall (images "wall.png")
+                    :ice (images "ice.png")
                     :floor (images "floor.png")
                     ; Entities
                     :player-up (images "player-up.png")
@@ -57,7 +58,7 @@
         (* tile-size player-y)
         nil))))
 
-(defn- draw-ui [steps {:keys [number name author width height] :as level} last-direction]
+(defn- draw-ui [steps total-steps {:keys [number name author width height] :as level} last-direction]
   (let [[scale-x scale-y] scale
         dummy-graphics (.createGraphics (BufferedImage. 1 1 BufferedImage/TYPE_INT_ARGB))
         dummy-font (.getFont dummy-graphics)
@@ -67,7 +68,7 @@
                    (format "%03d: %s (by %s)" number name author)
                    (format "%03d: %s" number name))
         top-width (.stringWidth font-metrics top-text)
-        bottom-text (format "Steps: %d" steps)
+        bottom-text (format "Steps: %d - Total: %d" steps steps)
         bottom-width (.stringWidth font-metrics bottom-text)
         game-width (* tile-size width scale-x)
         game-height (* tile-size height scale-y)
@@ -87,7 +88,7 @@
       image)))
 
 ;;; PUBLICS
-(defn generate-image [{:keys [steps level last-direction]}]
+(defn generate-image [{:keys [steps total-steps level last-direction]}]
   "Generates the final UI of the game (level+HUD)"
   (fn [ostream]
-    (ImageIO/write (draw-ui steps level last-direction) "png" ostream)))
+    (ImageIO/write (draw-ui steps total-steps level last-direction) "png" ostream)))

@@ -6,8 +6,7 @@
   (map2d
     #(condp = %
        \# :wall
-       
-       \@ :goal
+       \. :ice
        :floor)
     layout))
 
@@ -19,7 +18,8 @@
           {number (into level {:number number
                                :layout (parse-layout layout)
                                :width (apply max (map count layout))
-                               :height (count layout)})})))
+                               :height (count layout)
+                               :steps 0})})))
 
 ;;; PUBLICS
 
