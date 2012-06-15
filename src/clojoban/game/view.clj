@@ -87,8 +87,28 @@
       (draw-game g level last-direction)
       image)))
 
+(defn- draw-end []
+  (let [width 400
+        height 300
+        image (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)
+        g (.createGraphics image)
+        font (.getFont g)
+        font-metrics (.getFontMetrics g font)
+        font-height (+ 3 (.getHeight font-metrics))]
+    (do
+      (.setColor g (Color/BLACK))
+      (.fillRect g 0 0 width height)
+      (.setColor g (Color/WHITE))
+      (.setFont g font)
+      (.drawString g "Test..." 0 font-height)
+      image)))
+
 ;;; PUBLICS
 (defn generate-image [{:keys [steps total-steps level last-direction]}]
   "Generates the final UI of the game (level+HUD)"
   (fn [ostream]
-    (ImageIO/write (draw-ui steps total-steps level last-direction) "png" ostream)))
+    (ImageIO/write
+      (if (= level :end)
+        (draw-end)
+        (draw-ui steps total-steps level last-direction))
+      "png" ostream)))

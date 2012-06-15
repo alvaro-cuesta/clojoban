@@ -40,11 +40,14 @@
         level)))
 
 (defn- action-move [{:keys [steps total-steps level] :as session} direction]
-  (let [new-level (move-player level (directions direction))]
+  (when-let [new-level (move-player level (directions direction))]
     (cond
       (= level new-level)
-        session
-      (= (level num) (new-level num))
+        {:steps steps
+         :total-steps total-steps
+         :level level
+         :last-direction direction}
+      (= (level :number) (new-level :number))
         {:steps (inc steps)
          :total-steps (inc total-steps)
          :level new-level
@@ -67,14 +70,19 @@
    :level (levels 0)
    :last-direction :player-down})
 
-(defn- wrapper [fun]
+(defn- wrap-new [fun]
   #(if % (fun %) action-new))
+
+(defn- wrap-end [fun]
+  #(if (not= (% :level) :end)
+     (fun %)
+     %))
 
 (def game-controller
   #^{:doc "Map of 'actions' to functions for the game."}
-  {"_clojoban_up_" (wrapper #(action-move % :player-up))
-   "_clojoban_down_" (wrapper #(action-move % :player-down))
-   "_clojoban_left_" (wrapper #(action-move % :player-left))
-   "_clojoban_right_" (wrapper #(action-move % :player-right))
-   "_clojoban_restart_" (wrapper action-restart)
+  {"_clojoban_up_" (wrap-end (wrap-new #(action-move % :player-up)))
+   "_clojoban_down_" (wrap-end (wrap-new #(action-move % :player-down)))
+   "_clojoban_left_" (wrap-end (wrap-new #(action-move % :player-left)))
+   "_clojoban_right_" (wrap-end (wrap-new #(action-move % :player-right)))
+   "_clojoban_restart_" (wrap-end (wrap-new action-restart))
    "_clojoban_new_" action-new})

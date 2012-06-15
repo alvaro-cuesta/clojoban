@@ -31,4 +31,8 @@
   "Given a dir, add levels into clojoban.levels/levels."
   [dir]
   (dosync
-    (alter levels load-dir dir load-level)))
+    (alter levels load-dir dir load-level)
+    (alter levels
+           #(conj %
+                  {(apply max (keys %))
+                   :end}))))
