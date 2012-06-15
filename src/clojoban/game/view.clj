@@ -100,7 +100,10 @@
       (.fillRect g 0 0 width height)
       (.setColor g (Color/WHITE))
       (.setFont g font)
-      (.drawString g "Test..." 0 font-height)
+      (.drawString g "Congratulations, you reached the end level!" 4 font-height)
+      (.drawString g "Actually, you might want to come back for new levels." 4 (* 2 font-height))
+      (.drawString g "This game is constantly evolving," 4 (* 3 font-height))
+      (.drawString g "see the GitHub project on how to contribute." 4 (* 4 font-height))
       image)))
 
 ;;; PUBLICS
