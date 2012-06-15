@@ -22,13 +22,28 @@ kbd {
 	line-height: 1.4;
 }
 
-body, ul, h1, h2, h3, p { margin: 0 0 0 0; }
+body, ul, h1, h2, h3, p {
+	margin: 0 0 0 0;
+	font-family: ‘Lucida Console’, Monaco, monospace;
+}
+
+body {
+	font-size: 13px;
+	color: #666;
+}
+
+h1, h2, h3 {
+	color: #333;
+}
+
 html, body, #container { height: 100%; }
 body > #container { height: auto; min-height: 100%; }
 #game, #instructions {
 	padding: 10px;
 	padding-bottom: 3em;
 }
+
+h1 { font-size: 40px; }
 
 p { margin-bottom: 12px; }
 
@@ -40,6 +55,7 @@ p { margin-bottom: 12px; }
 	margin-top: -3em;
 	color: #fff;
 	background-color: #000;
+	font-size: 16px;
 }
 
 #footer-content { padding: 3px; }
@@ -49,7 +65,7 @@ a, a:link, a:visited, a:active, a:hover #footer {
 }
 
 .name {
-	color: #777;
+	color: #111;
 	font-family: "Courier New", Courier, monospace;
 	font-size: 13px;
 	font-style: italic;
