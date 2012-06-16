@@ -8,6 +8,7 @@
           :empty "empty.png"}
  :images {:box "box.png"
           :goal "goal.png"
+          :reached-goal "reached-goal.png"
           :player-up "player-up.png"
           :player-down "player-down.png"
           :player-left "player-left.png"

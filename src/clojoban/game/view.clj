@@ -20,7 +20,9 @@
     (doseq [goal goals ; Draw goals
             :let [[goal-x goal-y] goal]]
       (.drawImage g
-        (images :goal)
+        (if (some #(= goal %) boxes)
+          (images :reached-goal)
+          (images :goal))
         (* tile-width goal-x)
         (* tile-height goal-y)
         nil))
