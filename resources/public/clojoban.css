@@ -32,19 +32,13 @@ body {
 	color: #666;
 }
 
-h1, h2, h3 {
-	color: #333;
-}
+h1, h2, h3 { color: #333; }
 
 html, body, #container { height: 100%; }
 body > #container { height: auto; min-height: 100%; }
-#game, #instructions {
-	padding: 10px;
-	padding-bottom: 3em;
-}
-
+#game, #instructions { padding: 10px; }
+#instructions { padding-bottom: 4em; }
 h1 { font-size: 40px; }
-
 p { margin-bottom: 12px; }
 
 #footer {
@@ -60,9 +54,7 @@ p { margin-bottom: 12px; }
 
 #footer-content { padding: 3px; }
 
-a, a:link, a:visited, a:active, a:hover #footer {
-	color: #fff;
-}
+a, a:link, a:visited, a:active, a:hover #footer { color: #fff; }
 
 .name {
 	color: #111;
