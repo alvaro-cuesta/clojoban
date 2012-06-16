@@ -16,6 +16,14 @@ Unfortunately, I can't embed *Clojoban!* in this README since GitHub caches imag
 
 You can see a working embedded copy at [my Programming & Code Golf user profile](http://codegolf.stackexchange.com/users/4685/lvaro-cuesta). Also, there's an embedded copy at [Create a User-Profile Mini-Game](http://codegolf.stackexchange.com/questions/5933/create-a-user-profile-mini-game) (although there are some known [limitations](https://github.com/alvaro-cuesta/clojoban#limitations).)
 
+## Contributing
+
+If you know Clojure, just [fork Clojoban!](https://github.com/alvaro-cuesta/clojoban/fork) and let me know if you pulled something off. Remember checking the [license](https://github.com/alvaro-cuesta/clojoban#license).
+
+You can also contribute levels. See the [example levels](https://github.com/alvaro-cuesta/clojoban/tree/master/resources/levels) to get the feel about the format. There's an `:author` tag you might want to use (authorship will be shown in-game.)
+
+Of course, anyone contributing will be credited accordingly.
+
 ## Limitations
 
 #### Anchors
