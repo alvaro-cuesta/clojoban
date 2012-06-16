@@ -22,7 +22,7 @@ If you know Clojure, just [fork Clojoban!](https://github.com/alvaro-cuesta/cloj
 
 You can also contribute levels. See the [example levels](https://github.com/alvaro-cuesta/clojoban/tree/master/resources/levels) to get the feel about the format. There's an `:author` tag you might want to use (authorship will be shown in-game.)
 
-Of course, anyone contributing will be credited accordingly.
+Of course, anyone contributing will be credited accordingly in resource tags and in the [CONTRIBUTORS](https://github.com/alvaro-cuesta/clojoban/blob/master/CONTRIBUTORS.md) file
 
 ## Limitations
 
