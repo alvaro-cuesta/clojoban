@@ -55,7 +55,7 @@
         {:steps 0
          :total-steps (inc total-steps)
          :level new-level
-         :last-direction direction})))
+         :last-direction :player-down})))
 
 (defn- action-restart [{:keys [level] :as session}]
   {:steps 0
