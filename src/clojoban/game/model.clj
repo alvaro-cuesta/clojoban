@@ -34,5 +34,5 @@
     (alter levels load-dir dir load-level)
     (alter levels
            #(conj %
-                  {(apply max (keys %))
+                  {(inc (apply max (keys %)))
                    :end}))))

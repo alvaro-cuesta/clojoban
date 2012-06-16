@@ -28,15 +28,13 @@
       (if (not= to-tile :wall)
         (if (some #(= to %) boxes)
           (let [pushed-level (push-box to level direction)]
-            (if (and
-                  (not= level pushed-level)
-                  (= number (pushed-level :number)))
-              (move-player pushed-level direction)
+            (if (and (not= level pushed-level)
+                     (= number (pushed-level :number)))
+              (recur pushed-level direction)
               pushed-level))
-          (into level
-                (if (= to-tile :ice)
-                  (move-player (assoc level :player to) direction)
-                  {:player to})))
+          (if (= to-tile :ice)
+            (recur (assoc level :player to) direction)
+            (assoc level :player to)))
         level)))
 
 (defn- action-move [{:keys [steps total-steps level] :as session} direction]
