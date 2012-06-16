@@ -1,12 +1,14 @@
 {:desc   "Class Clojoban theme."
  :author "Álvaro Cuesta"
- :tiles [:floor "floor.png"
-         :ice "ice.png"
-         :wall "wall.png"
-         :empty "empty.png"]
- :images [:box "box.png"
+ :size   [16 16]
+ :scale  [2 2]
+ :tiles  {:floor "floor.png"
+          :ice "ice.png"
+          :wall "wall.png"
+          :empty "empty.png"}
+ :images {:box "box.png"
           :goal "goal.png"
           :player-up "player-up.png"
           :player-down "player-down.png"
           :player-left "player-left.png"
-          :player-right "player-right.png"]}
+          :player-right "player-right.png"}}

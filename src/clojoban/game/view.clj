@@ -6,40 +6,40 @@
 
 ;;; PRIVATES
 (defn- draw-game [g theme {:keys [width height layout player boxes goals]} last-direction]
-  (let [tile-width ((theme :size) 0)
-        tile-height ((theme :size) 1)
+  (let [[tile-width tile-height] (theme :size)
+        tiles (theme :tiles)
+        images (theme :images)
         [player-x player-y] player]
     (doseq [y (range height) ; Draw layout
             x (range (count (layout y)))]
       (.drawImage g
-        ((theme :tiles) (get-in layout [y x]))
+        (tiles (get-in layout [y x]))
         (* tile-width x)
         (* tile-height y)
         nil))
     (doseq [goal goals ; Draw goals
             :let [[goal-x goal-y] goal]]
       (.drawImage g
-        ((theme :images) :goal)
+        (images :goal)
         (* tile-width goal-x)
         (* tile-height goal-y)
         nil))
     (doseq [box boxes ; Draw boxes
             :let [[box-x box-y] box]]
       (.drawImage g
-        ((theme :images) :box)
+        (images :box)
         (* tile-width box-x)
         (* tile-height box-y)
         nil))
     (.drawImage g ; Draw player
-      ((theme :images) last-direction)
+      (images last-direction)
       (* tile-width player-x)
       (* tile-height player-y)
       nil)))
 
 (defn- draw-ui
   [theme steps total-steps {:keys [number name author width height] :as level} last-direction]
-  (let [tile-width ((theme :size) 0)
-        tile-height ((theme :size) 1)
+  (let [[tile-width tile-height] (theme :size)
         [scale-x scale-y] (theme :scale)
         dummy-graphics (.createGraphics (BufferedImage. 1 1 BufferedImage/TYPE_INT_ARGB))
         dummy-font (.getFont dummy-graphics)

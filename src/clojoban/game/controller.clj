@@ -78,10 +78,11 @@
      (fun %)
      %))
 
-(defn- wrap-theme [fun]
-  #(if (nil? (% :theme))
-     (assoc (fun %) :theme :default)
-     (fun %)))
+(defn- wrap-theme [fun theme]
+  #(cond
+     (not (nil? theme)) (assoc (fun %) :theme (keyword theme))
+     (nil? (% :theme)) (assoc (fun %) :theme :default)
+     :else (fun %)))
 
 (defn game-controller [referer]
   "The controller of the game. Reads query-map and acts accordingly"
@@ -96,4 +97,4 @@
           :else identity)
       (wrap-end)
       (wrap-new)
-      (wrap-theme))))
+      (wrap-theme (query-map :_clojoban_theme_)))))
