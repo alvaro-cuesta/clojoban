@@ -1,11 +1,7 @@
-{:name   "Two much"
- :layout ["######"
-          "#    #"
-          "#  # #"
-          "#  # #"
-          "######"]
- :player [2 3]
- :boxes  [[2 2]
-          [4 2]]
- :goals  [[2 1]
-          [4 3]]}
+{:name   "The Beginning"
+ :layout ["#########"
+          "#       #"
+          "#########"]
+ :player [2 1]
+ :boxes  [[4 1]]
+ :goals  [[6 1]]}

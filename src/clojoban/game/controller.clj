@@ -1,6 +1,7 @@
 (ns clojoban.game.controller
   "Game actions controller. Implements the game's logic."
-  (:use [clojoban.game.model :only [levels]]))
+  (:use [clojoban.utils :only [split-query]] 
+        [clojoban.game.model :only [levels]]))
 
 (def directions
   {:player-up [0 -1]
@@ -56,31 +57,43 @@
          :level new-level
          :last-direction direction})))
 
-(defn- action-restart [{:keys [total-steps level] :as session}]
+(defn- action-restart [{:keys [level] :as session}]
   {:steps 0
-   :total-steps total-steps
    :level (levels (level :number))
    :last-direction :player-down})
 
 (defn- action-new [_]
   {:steps 0
    :total-steps 0
-   :level (levels 0)
+   :level (levels 1)
    :last-direction :player-down})
 
 (defn- wrap-new [fun]
-  #(if % (fun %) action-new))
+  #(if (empty? %)
+     (action-new %)
+     (fun %)))
 
 (defn- wrap-end [fun]
   #(if (not= (% :level) :end)
      (fun %)
      %))
 
-(def game-controller
-  #^{:doc "Map of 'actions' to functions for the game."}
-  {"_clojoban_up_" (wrap-end (wrap-new #(action-move % :player-up)))
-   "_clojoban_down_" (wrap-end (wrap-new #(action-move % :player-down)))
-   "_clojoban_left_" (wrap-end (wrap-new #(action-move % :player-left)))
-   "_clojoban_right_" (wrap-end (wrap-new #(action-move % :player-right)))
-   "_clojoban_restart_" (wrap-end (wrap-new action-restart))
-   "_clojoban_new_" action-new})
+(defn- wrap-theme [fun]
+  #(if (nil? (% :theme))
+     (assoc (fun %) :theme :default)
+     (fun %)))
+
+(defn game-controller [referer]
+  "The controller of the game. Reads query-map and acts accordingly"
+  (let [query-map (split-query referer)]
+    (-> (cond
+          (query-map :_clojoban_up_) #(action-move % :player-up)
+          (query-map :_clojoban_down_) #(action-move % :player-down)
+          (query-map :_clojoban_left_) #(action-move % :player-left)
+          (query-map :_clojoban_right_) #(action-move % :player-right)
+          (query-map :_clojoban_restart_) action-restart
+          (query-map :_clojoban_new_) action-new
+          :else identity)
+      (wrap-end)
+      (wrap-new)
+      (wrap-theme))))

@@ -1,7 +1,0 @@
-{:name   "The Beginning"
- :layout ["#########"
-          "#       #"
-          "#########"]
- :player [2 1]
- :boxes  [[4 1]]
- :goals  [[6 1]]}
