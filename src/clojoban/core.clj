@@ -55,9 +55,11 @@
 
 (defn -main
   "Launches the server at port, loading the levels from dir."
-  ([port level-dir theme-dir]
+  ([port level-dir theme-dir threads]
     (init level-dir theme-dir)
     (println "Launching game server on port" (Integer. port))
     (flyweight/start handler (Integer. port) 100))
+  ([port level-dir theme-dir] (-main port level-dir theme-dir 50))
+  ([port threads] (-main port "resources/levels" "resources/themes" threads))
   ([port] (-main port "resources/levels" "resources/themes"))
   ([] (-main 1337)))
