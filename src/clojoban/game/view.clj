@@ -60,15 +60,14 @@
         image (BufferedImage. img-width img-height BufferedImage/TYPE_INT_ARGB)
         g (.createGraphics image)
         font (.getFont g)]
-    (do
-      (.setColor g (Color/BLACK))
-      (.setFont g font)
-      (.drawString g top-text 0 font-height)
-      (.drawString g bottom-text 0 (+ (* 2 font-height) game-height -3))
-      (.translate g 0 (+ 3 font-height))
-      (.scale g scale-x scale-y)
-      (draw-game g theme level last-direction)
-      image)))
+    (.setColor g (Color/BLACK))
+    (.setFont g font)
+    (.drawString g top-text 0 font-height)
+    (.drawString g bottom-text 0 (+ (* 2 font-height) game-height -3))
+    (.translate g 0 (+ 3 font-height))
+    (.scale g scale-x scale-y)
+    (draw-game g theme level last-direction)
+    image))
 
 (defn- draw-end []
   (let [width 400
@@ -78,16 +77,15 @@
         font (.getFont g)
         font-metrics (.getFontMetrics g font)
         font-height (+ 3 (.getHeight font-metrics))]
-    (do
-      (.setColor g (Color/BLACK))
-      (.fillRect g 0 0 width height)
-      (.setColor g (Color/WHITE))
-      (.setFont g font)
-      (.drawString g "Congratulations, you reached the end level!" 4 font-height)
-      (.drawString g "Actually, you might want to come back for new levels." 4 (* 2 font-height))
-      (.drawString g "This game is constantly evolving," 4 (* 3 font-height))
-      (.drawString g "see the GitHub project on how to contribute." 4 (* 4 font-height))
-      image)))
+    (.setColor g (Color/BLACK))
+    (.fillRect g 0 0 width height)
+    (.setColor g (Color/WHITE))
+    (.setFont g font)
+    (.drawString g "Congratulations, you reached the end level!" 4 font-height)
+    (.drawString g "Actually, you might want to come back for new levels." 4 (* 2 font-height))
+    (.drawString g "This game is constantly evolving," 4 (* 3 font-height))
+    (.drawString g "see the GitHub project on how to contribute." 4 (* 4 font-height))
+    image))
 
 ;;; PUBLICS
 (defn generate-image [{:keys [theme steps total-steps level last-direction]}]
