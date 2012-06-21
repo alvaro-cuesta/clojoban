@@ -54,16 +54,17 @@ Some people disable this feature for privacy reasons, so remotely-embedded Clojo
 
 ```
 - Leiningen:
-lein run <port> <levels-dir theme-dir>
+lein run <port> <threads> <levels-dir theme-dir>
 
 - lein-ring:
 lein ring server-headless <port>
 ```
 
-Default parameter values:
+You can leave out parameters, but it must be in order (e.g., you can't specify threads without a port.) These are the default parameter values:
 
 ```
 port = 1337
+threads = 50
 levels-dir = resources/levels
 theme-dir = resources/images
 ```
