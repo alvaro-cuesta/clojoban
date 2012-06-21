@@ -1,4 +1,4 @@
-(ns flyweight.theme
+(ns flyweight.themes
   "Theme management."
   (:use [flyweight.utils :only [load-dir]]
         [clojure.java.io :only [file]])
@@ -6,7 +6,6 @@
 
 (defn- load-theme [themes folder]
   (let [name (.getName folder)
-        ;theme (read-string (slurp (.getAbsolutePath (file folder "theme"))))
         theme (read-string (slurp (file folder "theme")))
         tiles (theme :tiles)
         images (theme :images)]
@@ -22,7 +21,7 @@
 
 ;;; PUBLICS
 
-(def themes
+(def themes ; TODO: it doesn't belong here!
   #^{:doc "Map of themes, indexed by parent folder."}
   (ref {}))
 

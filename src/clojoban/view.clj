@@ -1,6 +1,6 @@
 (ns clojoban.view
   "Game UI generation (the game view.)"
-  (:use [flyweight.theme :only [themes]]
+  (:use [flyweight.themes :only [themes]]
         [flyweight ui])
   (:import [java.awt Color Font FontMetrics]))
 
@@ -97,7 +97,7 @@
 
 ;;; PUBLICS
 (defn generate-image [{:keys [theme steps total-steps level last-direction]}]
-  "Generates the final UI of the game (level+HUD)"
+  "The game view image generation."
   (if (= level :end)
     (end-image)
     (game-image (themes theme) steps total-steps level last-direction)))

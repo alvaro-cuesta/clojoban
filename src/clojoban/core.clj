@@ -2,9 +2,8 @@
   "A little Sokoban clone for \"Create a User-Profile Mini-Game\" at http://codegolf.stackexchange.com"
   (:use [clojoban.model :only [add-levels]]
         [clojoban view controller]
-        [flyweight.theme :only [themes add-themes]]
+        [flyweight.themes :only [themes add-themes]]
         [flyweight.core :as flyweight]
-        [ring.adapter.jetty :only [run-jetty]]
         [ring.middleware session stacktrace resource]
         [compojure.core])
   (:require [compojure.route :as route])
@@ -59,6 +58,6 @@
   ([port level-dir theme-dir]
     (init level-dir theme-dir)
     (println "Launching game server on port" (Integer. port))
-    (run-jetty handler {:port (Integer. port) :join? false}))
+    (flyweight/start handler (Integer. port)))
   ([port] (-main port "resources/levels" "resources/themes"))
   ([] (-main 1337)))

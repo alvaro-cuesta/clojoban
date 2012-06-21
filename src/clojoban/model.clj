@@ -1,5 +1,5 @@
 (ns clojoban.model
-  "Level management. Generates and hold the game model."
+  "Level management. Generates and holds the game model."
   (:use [flyweight.utils :only [load-dir map2d]]))
 
 (defn- parse-layout [layout]
@@ -12,7 +12,7 @@
 
 (defn- load-level [levels file]
   (let [number (Integer. (.getName file))
-        level (read-string (slurp (.getAbsolutePath file)))
+        level (read-string (slurp file))
         layout (level :layout)]
     (conj levels
           {number (into level {:number number

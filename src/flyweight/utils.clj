@@ -26,10 +26,8 @@
         (into {}))
       {})))
 
-(defn stream-image [image]
-  """
-  Streams an image, returned as a 1-arg (ostream) function.
-  Suitable for Ring's piped-input-stream. 
-  """
+(defn stream-image [image format]
+  "Streams an image, returned as a 1-arg (ostream) function
+  suitable for Ring's piped-input-stream."
   (fn [ostream]
-    (ImageIO/write image "png" ostream)))
+    (ImageIO/write image format ostream)))

@@ -1,8 +1,8 @@
 (ns flyweight.ui
+  "User-interface tools (images, drawing, etc.)"
   (:import [java.awt.image BufferedImage]))
 
-;; image system
-
+;;; image system
 (declare ^:dynamic *g*)
 
 (defrecord Image
@@ -10,19 +10,14 @@
 
 (defn new-image [width height]
   (let [image (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)]
-    (Image.
-      image
-      (.createGraphics image))))
-
-(defmacro dbg[x] `(let [x# ~x] (println '~x "=" x#) x#))
+    (Image. image (.createGraphics image))))
 
 (defmacro with-image [image & body]
   `(binding [*g* (.graphics ~image)]
      (do ~@body
        (.image ~image))))
 
-;; graphics manipulation
-
+;;; graphics manipulation
 (defmulti draw!
   (fn [what x y] (class what)))
 (defmethod draw! java.awt.Image draw!-image
