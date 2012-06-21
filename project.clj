@@ -11,7 +11,7 @@
   :plugins [[lein-ring "0.7.1"]]
   
   :main clojoban.core
-  :ring {:handler clojoban.core/app
-         :init clojoban.core/boot
+  :ring {:handler clojoban.core/handler
+         :init clojoban.core/init
          :port 1337
          :join? false})

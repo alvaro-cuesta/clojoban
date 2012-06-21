@@ -1,7 +1,7 @@
-(ns clojoban.game.controller
+(ns clojoban.controller
   "Game actions controller. Implements the game's logic."
-  (:use [clojoban.utils :only [split-query]] 
-        [clojoban.game.model :only [levels]]))
+  (:use [clojoban.model :only [levels]]
+        [flyweight.utils :only [split-query]]))
 
 (def directions
   {:player-up [0 -1]
@@ -89,13 +89,14 @@
   (let [query-map (split-query referer)]
     (if (query-map :_clojoban_new_)
       action-new
-      (-> (cond
-            (query-map :_clojoban_up_) #(action-move % :player-up)
-            (query-map :_clojoban_down_) #(action-move % :player-down)
-            (query-map :_clojoban_left_) #(action-move % :player-left)
-            (query-map :_clojoban_right_) #(action-move % :player-right)
-            (query-map :_clojoban_restart_) action-restart
-            :else identity)
+      (->
+        (cond
+          (query-map :_clojoban_up_) #(action-move % :player-up)
+          (query-map :_clojoban_down_) #(action-move % :player-down)
+          (query-map :_clojoban_left_) #(action-move % :player-left)
+          (query-map :_clojoban_right_) #(action-move % :player-right)
+          (query-map :_clojoban_restart_) action-restart
+          :else identity)
         (wrap-end)
         (wrap-new)
         (wrap-theme (query-map :_clojoban_theme_))))))
