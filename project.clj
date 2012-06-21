@@ -14,4 +14,5 @@
   :ring {:handler clojoban.core/handler
          :init clojoban.core/init
          :port 1337
-         :join? false})
+         :join? false
+         :max-threads 50})

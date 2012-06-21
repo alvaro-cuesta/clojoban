@@ -58,6 +58,6 @@
   ([port level-dir theme-dir]
     (init level-dir theme-dir)
     (println "Launching game server on port" (Integer. port))
-    (flyweight/start handler (Integer. port)))
+    (flyweight/start handler (Integer. port) 100))
   ([port] (-main port "resources/levels" "resources/themes"))
   ([] (-main 1337)))

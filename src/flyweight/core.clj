@@ -4,9 +4,15 @@
         [ring.util response io]
         [ring.adapter.jetty]))
 
-(defn start [handler port]
-  "Start the game server."
-  (run-jetty handler {:port port :join? false}))
+(defn start
+  "Start the game server at port, handling requests on handler."
+  ([handler port threads]
+    (run-jetty handler
+               {:port port
+                :join? false
+                :max-threads threads}))
+  ([handler port]
+    (start handler port 50)))
 
 (defn step [game-controller image-generator]
   "Step in-game, mutating gamestate (session data) through game-controller
