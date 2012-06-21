@@ -11,22 +11,19 @@
         images (theme :images)]
     (conj themes
           {(keyword name)
-           (into theme {:name name
-                        :tiles (into {} (map (fn [[k v]]
-                                               [k (ImageIO/read (file folder v))])
-                                             tiles))
-                        :images (into {} (map (fn [[k v]]
-                                                [k (ImageIO/read (file folder v))])
-                                              images))})})))
+           (into theme
+                 {:name name
+                  :tiles (into {} (map (fn [[k v]]
+                                         [k (ImageIO/read (file folder v))])
+                                       tiles))
+                  :images (into {} (map (fn [[k v]]
+                                          [k (ImageIO/read (file folder v))])
+                                        images))})})))
 
 ;;; PUBLICS
 
-(def themes ; TODO: it doesn't belong here!
-  #^{:doc "Map of themes, indexed by parent folder."}
-  (ref {}))
-
 (defn add-themes
   "Given a dir, add themes into flyweight.theme/themes."
-  [dir]
+  [dir themes]
   (dosync
     (alter themes load-dir dir load-theme)))

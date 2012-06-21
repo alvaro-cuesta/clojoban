@@ -1,16 +1,15 @@
 (ns clojoban.core
   "A little Sokoban clone for \"Create a User-Profile Mini-Game\" at http://codegolf.stackexchange.com"
-  (:use [clojoban.model :only [add-levels]]
-        [clojoban view controller]
-        [flyweight.themes :only [themes add-themes]]
-        [flyweight.core :as flyweight]
+  (:use [clojoban model view controller]
+        [flyweight.core :as fw]
+        [flyweight.themes]
         [ring.middleware session stacktrace resource]
         [compojure.core])
   (:require [compojure.route :as route])
   (:gen-class))
 
 (defroutes clojoban
-  (GET "/game" [] (flyweight/step game-controller generate-image))
+  (GET "/game" [] (fw/step game-controller generate-image))
   (route/resources "/")
   (route/resources "/themes" {:root "themes"})
   (route/resources "/levels" {:root "levels"})
@@ -50,7 +49,7 @@
   "Bootstraps the needed data to start the server."
   ([level-dir theme-dir]
     (add-levels level-dir)
-    (add-themes theme-dir))
+    (add-themes theme-dir themes))
   ([] (init "resources/levels" "resources/themes")))
 
 (defn -main
@@ -58,7 +57,7 @@
   ([port level-dir theme-dir threads]
     (init level-dir theme-dir)
     (println "Launching game server on port" (Integer. port))
-    (flyweight/start handler (Integer. port) 100))
+    (fw/start handler (Integer. port) threads))
   ([port level-dir theme-dir] (-main port level-dir theme-dir 50))
   ([port threads] (-main port "resources/levels" "resources/themes" threads))
   ([port] (-main port "resources/levels" "resources/themes"))

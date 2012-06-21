@@ -15,11 +15,12 @@
         level (read-string (slurp file))
         layout (level :layout)]
     (conj levels
-          {number (into level {:number number
-                               :layout (parse-layout layout)
-                               :width (apply max (map count layout))
-                               :height (count layout)
-                               :steps 0})})))
+          {number (into level
+                        {:number number
+                         :layout (parse-layout layout)
+                         :width (apply max (map count layout))
+                         :height (count layout)
+                         :steps 0})})))
 
 ;;; PUBLICS
 

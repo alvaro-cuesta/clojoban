@@ -1,7 +1,6 @@
 (ns clojoban.view
   "Game UI generation (the game view.)"
-  (:use [flyweight.themes :only [themes]]
-        [flyweight ui])
+  (:use [flyweight ui])
   (:import [java.awt Color Font FontMetrics]))
 
 ;;; PRIVATES
@@ -96,6 +95,10 @@
              4 (* 4 font-height)))))
 
 ;;; PUBLICS
+(def themes
+  #^{:doc "Map of themes, indexed by parent folder."}
+  (ref {}))
+
 (defn generate-image [{:keys [theme steps total-steps level last-direction]}]
   "The game view image generation."
   (if (= level :end)
